@@ -6,17 +6,10 @@ import java.util.logging.Level;
 
 public final class PoaLib extends JavaPlugin {
 
-    public static PoaLib libINSTANCE;
-
-    @Override
-    public void onEnable() {
-        libINSTANCE = this;
-
-    }
 
 
-    public static void isLoaded(){
-        libINSTANCE.getLogger().log(Level.INFO, "PoaLib Loaded");
+    public void isLoaded(){
+        this.getLogger().log(Level.INFO, "PoaLib Loaded");
     }
 
 }
