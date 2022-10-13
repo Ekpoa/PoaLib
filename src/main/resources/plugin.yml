@@ -1,0 +1,4 @@
+name: PoaLib
+version: '${project.version}'
+main: poa.poalib.PoaLib
+api-version: 1.19
