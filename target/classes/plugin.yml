@@ -1,0 +1,11 @@
+name: PoaLib
+version: 2
+main: poa.poalib.PoaLib
+api-version: 1.19
+softdepend:
+  - WorldGuard
+  - LuckPerms
+  - Vault
+commands:
+  poalibtestcommand:
+      permission: poa.libtestcommand
