@@ -152,10 +152,5 @@
             <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>poa</groupId>
-            <artifactId>NMS</artifactId>
-            <version>1</version>
-        </dependency>
     </dependencies>
 </project>
