@@ -106,4 +106,25 @@ public class Messages {
         }
     }
 
+    private static final char[] SMALL_CAPS_ALPHABET = "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘqʀꜱᴛᴜᴠᴡxyᴢ".toCharArray();
+
+    public static String toSmallCaps(String text) {
+        if (null == text) {
+            return null;
+        }
+        text = text.toLowerCase();
+        int length = text.length();
+        StringBuilder smallCaps = new StringBuilder(length);
+        for (int i = 0; i < length; ++i) {
+            char c = text.charAt(i);
+
+            if (c >= 'a' && c <= 'z') {
+                smallCaps.append(SMALL_CAPS_ALPHABET[c - 'a']);
+            } else {
+                smallCaps.append(c);
+            }
+        }
+        return smallCaps.toString();
+    }
+
 }
