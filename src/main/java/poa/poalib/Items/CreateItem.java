@@ -1,5 +1,6 @@
 package poa.poalib.Items;
 
+import de.tr7zw.changeme.nbtapi.NBT;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -47,9 +48,9 @@ public class CreateItem {
 
         item.setItemMeta(meta);
 
-        NBTItem nbt = new NBTItem(item, true);
-        nbt.setString(nbtKey, nbtValue);
-
+        NBT.modify(item, nbt -> {
+            nbt.setString(nbtKey, nbtValue);
+        });
         return item;
     }
 
