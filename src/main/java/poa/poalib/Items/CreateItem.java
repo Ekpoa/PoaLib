@@ -11,6 +11,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import poa.poalib.Messages.Messages;
 
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.BitSet;
 import java.util.List;
 
 public class CreateItem {
@@ -87,6 +89,14 @@ public class CreateItem {
         return MiniMessage.miniMessage().serialize(meta.displayName());
     }
 
+
+    public static ItemStack deserializeItem(String base64){
+        return ItemStack.deserializeBytes(Base64.getDecoder().decode(base64));
+    }
+    public static String serializeItem(ItemStack itemStack){
+        ItemStack item = itemStack.clone();
+        return Base64.getEncoder().encodeToString(item.serializeAsBytes());
+    }
 
 
 }
