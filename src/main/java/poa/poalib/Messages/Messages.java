@@ -1,5 +1,8 @@
 package poa.poalib.Messages;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.OfflinePlayer;
+
 import java.text.DecimalFormat;
 
 public class Messages {
@@ -8,11 +11,11 @@ public class Messages {
     public static String essentialsToMinimessage(String string) {
         String x = string.replaceAll("&#([a-fA-F0-9]{6})", "<#$1><bold:false><underlined:false><strikethrough:false><italic:false><obfuscated:false>");
         x = x.replace("§", "&");
-        x = x.replace("&l", "<bold>");
-        x = x.replace("&n", "<underlined>");
-        x = x.replace("&m", "<strikethrough>");
-        x = x.replace("&o", "<italic>");
-        x = x.replace("&k", "<obfuscated>");
+        x = x.replace("&l", "<bold><underlined:false><strikethrough:false><italic:false><obfuscated:false>");
+        x = x.replace("&n", "<underlined><bold:false><strikethrough:false><italic:false><obfuscated:false>");
+        x = x.replace("&m", "<strikethrough><bold:false><underlined:false><italic:false><obfuscated:false>");
+        x = x.replace("&o", "<italic><bold:false><underlined:false><strikethrough:false><obfuscated:false>");
+        x = x.replace("&k", "<obfuscated><bold:false><underlined:false><strikethrough:false><italic:false>");
         x = x.replace("&r", "<reset>");
         x = x.replace("&0", "<black><bold:false><underlined:false><strikethrough:false><italic:false><obfuscated:false>");
         x = x.replace("&1", "<dark_blue><bold:false><underlined:false><strikethrough:false><italic:false><obfuscated:false>");
@@ -38,6 +41,10 @@ public class Messages {
 
     public static String bukkitToEssentials(String string){
         return string.replaceAll("§x§(.)§(.)§(.)§(.)§(.)§(.)", "&#$1$2$3$4$5$6");
+    }
+
+    public static String placeholder(OfflinePlayer player, String string){
+        return PlaceholderAPI.setPlaceholders(player, string);
     }
 
 
