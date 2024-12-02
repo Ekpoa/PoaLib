@@ -134,4 +134,24 @@ public class Messages {
         return smallCaps.toString();
     }
 
+    public static String progressBar(int amount, int outOf, int total) {
+        int percent = (int) Math.round((outOf / (double) total) * 100);
+
+        percent = Math.min(percent, 100);
+
+        int greenSymbols = (int) Math.round((percent / 100.0) * amount);
+
+        StringBuilder progressBar = new StringBuilder();
+
+        for (int i = 0; i < amount; i++) {
+            if (i < greenSymbols) {
+                progressBar.append("§a|");
+            } else {
+                progressBar.append("§c|");
+            }
+        }
+
+        return progressBar.toString();
+    }
+
 }
