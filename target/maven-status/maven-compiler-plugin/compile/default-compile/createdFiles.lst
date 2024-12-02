@@ -25,6 +25,7 @@ poa/poalib/WorldGuard/RegionAt.class
 poa/poalib/Reflection/ReflectionUtility.class
 poa/poalib/PacketUtil/Laser$1.class
 poa/poalib/WorldGuard/Events/RegionChangeEvent.class
+poa/poalib/WorldGuard/WorldGuard.class
 poa/poalib/Commands/TimeInput.class
 poa/poalib/BlockUtil/BlockMarker.class
 poa/poalib/WorldGuard/WorldGuardMain.class
