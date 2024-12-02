@@ -14,7 +14,7 @@ import org.bukkit.util.BlockVector;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class BlocksInRegion {
 
     public static List<Block> getBlocksInRegion(String regionId, World world, boolean includeAir) {
