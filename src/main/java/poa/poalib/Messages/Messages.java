@@ -4,6 +4,8 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.OfflinePlayer;
 
 import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Messages {
 
@@ -152,6 +154,51 @@ public class Messages {
         }
 
         return progressBar.toString();
+    }
+
+    public static long convertToSeconds(String duration) {
+        if (duration == null || duration.isEmpty()) {
+            throw new IllegalArgumentException("Duration string cannot be null or empty.");
+        }
+
+        // Regular expression to match the pattern (e.g., 2s, 3m, 4h, etc.)
+        Pattern pattern = Pattern.compile("(\\d+)([smhdw])");
+        Matcher matcher = pattern.matcher(duration);
+
+        long totalSeconds = 0;
+
+        // Conversion factors
+        final int SECONDS_IN_MINUTE = 60;
+        final int SECONDS_IN_HOUR = 60 * SECONDS_IN_MINUTE;
+        final int SECONDS_IN_DAY = 24 * SECONDS_IN_HOUR;
+        final int SECONDS_IN_WEEK = 7 * SECONDS_IN_DAY;
+
+        while (matcher.find()) {
+            int value = Integer.parseInt(matcher.group(1));
+            char unit = matcher.group(2).charAt(0);
+
+            switch (unit) {
+                case 's':
+                    totalSeconds += value;
+                    break;
+                case 'm':
+                    totalSeconds += value * SECONDS_IN_MINUTE;
+                    break;
+                case 'h':
+                    totalSeconds += value * SECONDS_IN_HOUR;
+                    break;
+                case 'd':
+                    totalSeconds += value * SECONDS_IN_DAY;
+                    break;
+                case 'w':
+                    totalSeconds += value * SECONDS_IN_WEEK;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unexpected unit: " + unit);
+            }
+        }
+
+        return totalSeconds;
     }
 
 }
