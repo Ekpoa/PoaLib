@@ -107,6 +107,7 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>bytecode.space</id>
@@ -162,6 +163,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.34</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Gypopo</groupId>
+            <artifactId>EconomyShopGUI-API</artifactId>
+            <version>1.7.2</version>
         </dependency>
     </dependencies>
 </project>
