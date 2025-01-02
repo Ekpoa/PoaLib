@@ -19,6 +19,7 @@ poa/poalib/PacketUtil/Laser$Packets$ProtocolMappings$2.class
 poa/poalib/WorldGuard/Events/PlayerMoveListener.class
 poa/poalib/NMSRelated/EntityNMS.class
 poa/poalib/Commands/TestCommand.class
+poa/poalib/economyshopgui/EconomyShop.class
 poa/poalib/Items/Attributes.class
 poa/poalib/Messages/Log.class
 poa/poalib/Webhooks/DiscordWebhook$EmbedObject.class
