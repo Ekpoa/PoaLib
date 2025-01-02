@@ -6,6 +6,7 @@ softdepend:
   - WorldGuard
   - LuckPerms
   - Vault
+  - EconomyShopGUI-Premium
 commands:
   poalibtestcommand:
       permission: poa.libtestcommand
