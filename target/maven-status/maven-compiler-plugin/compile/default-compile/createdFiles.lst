@@ -38,6 +38,7 @@ poa/poalib/Math/Cardial$Cardinal.class
 poa/poalib/PacketUtil/Laser.class
 poa/poalib/PacketUtil/Laser$CrystalLaser.class
 poa/poalib/Items/CreateItem.class
+poa/poalib/yml/PoaYaml.class
 poa/poalib/Webhooks/DiscordWebhook$EmbedObject$Thumbnail.class
 poa/poalib/Webhooks/DiscordWebhook$EmbedObject$Footer.class
 poa/poalib/Math/Euler.class

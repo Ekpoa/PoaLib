@@ -1,6 +1,8 @@
 package poa.poalib.Messages;
 
+import io.papermc.paper.adventure.PaperAdventure;
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 
 import java.text.DecimalFormat;
@@ -199,6 +201,10 @@ public class Messages {
         }
 
         return totalSeconds;
+    }
+
+    public static Component componentActual(net.minecraft.network.chat.Component nms) {
+        return PaperAdventure.WRAPPER_AWARE_SERIALIZER.deserialize(nms);
     }
 
 }
