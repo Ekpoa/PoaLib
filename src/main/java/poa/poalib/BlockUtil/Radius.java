@@ -55,9 +55,6 @@ public class Radius {
                             tr.add(blockAt);
 
                     }
-
-
-
                 }
         return tr;
     }
