@@ -23,6 +23,7 @@ poa/poalib/economyshopgui/EconomyShop.class
 poa/poalib/Items/Attributes.class
 poa/poalib/Messages/Log.class
 poa/poalib/Webhooks/DiscordWebhook$EmbedObject.class
+poa/poalib/BlockUtil/CurveLocation.class
 poa/poalib/WorldGuard/RegionAt.class
 poa/poalib/Reflection/ReflectionUtility.class
 poa/poalib/PacketUtil/Laser$1.class
