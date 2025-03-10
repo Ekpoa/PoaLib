@@ -6,9 +6,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 public class LuckPerm {
 
@@ -35,6 +37,18 @@ public class LuckPerm {
             user.getNodes().add(Node.builder(node).build());
         });
     }
+
+    public static CompletableFuture<Boolean> hasPermission(UUID uuid, String node){
+        final CompletableFuture<Boolean> future = new CompletableFuture<>();
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAcceptAsync(user -> {
+            final List<String> stringStream = user.getNodes().stream().map(n -> n.getKey().toLowerCase()).toList();
+
+            future.complete(stringStream.contains(node));
+
+        });
+        return future;
+    }
+
 
 
 
