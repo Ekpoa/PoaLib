@@ -3,6 +3,7 @@ package poa.poalib.LuckPerms;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
 
@@ -38,17 +39,9 @@ public class LuckPerm {
         });
     }
 
-    public static CompletableFuture<Boolean> hasPermission(UUID uuid, String node){
-        final CompletableFuture<Boolean> future = new CompletableFuture<>();
-        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAcceptAsync(user -> {
-            final List<String> stringStream = user.getNodes().stream().map(n -> n.getKey().toLowerCase()).toList();
-
-            future.complete(stringStream.contains(node));
-
-        });
-        return future;
+    public static String getPrefix(Player player){
+        return PoaLib.lpAPI.getPlayerAdapter(Player.class).getMetaData(player).getPrefix();
     }
-
 
 
 
