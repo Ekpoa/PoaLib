@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Radius {
 
-    public static List<Block> getCircle(Location loc, int radius) {
+    public static List<Block> getCircle(Location loc, int radius, boolean square) {
         World world = loc.getWorld();
         int
                 minX = loc.getBlockX() - radius,
@@ -22,11 +22,27 @@ public class Radius {
         List<Block> tr = new ArrayList<>();
 
         for (int x = minX; x <= maxX; x++)
-            for (int z = minZ; z <= maxZ; z++)
-                tr.add(world.getBlockAt(new Location(world, x, y, z)));
+            for (int z = minZ; z <= maxZ; z++) {
+                final Location location = new Location(world, x, y, z);
+                if (!square) {
+                    if (loc.distanceSquared(loc) <= (radius * radius)) {
+                        tr.add(world.getBlockAt(location));
+                    }
+                }
+                else
+                    tr.add(world.getBlockAt(location));
+            }
 
         return tr;
     }
+    public static List<Block> getCircle(Location loc, int radius){
+        return getCircle(loc, radius, false);
+    }
+
+    public static List<Block> getSquare(Location loc, int radius){
+        return getCircle(loc, radius, true);
+    }
+
 
     public static List<Block> getSphere(Location loc, int radius, boolean includeAir) {
         World world = loc.getWorld();
@@ -44,12 +60,12 @@ public class Radius {
             for (int y = minY; y <= maxY; y++)
                 for (int z = minZ; z <= maxZ; z++) {
                     Location location = new Location(world, x, y, z);
-                    if(!location.isChunkLoaded())
+                    if (!location.isChunkLoaded())
                         continue;
 
                     if (location.distanceSquared(loc) <= radius * radius) {
                         Block blockAt = world.getBlockAt(location);
-                        if(!blockAt.getType().isAir())
+                        if (!blockAt.getType().isAir())
                             tr.add(blockAt);
                         else if (includeAir)
                             tr.add(blockAt);

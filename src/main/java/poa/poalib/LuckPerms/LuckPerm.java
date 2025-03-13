@@ -23,6 +23,14 @@ public class LuckPerm {
         return null;
     }
 
+    public static CompletableFuture<String> getPrimaryGroup(UUID uuid) {
+        final CompletableFuture<String> future = new CompletableFuture<>();
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAcceptAsync(user -> {
+            future.complete(user.getPrimaryGroup());
+        });
+        return future;
+    }
+
     public static List<String> getGroups(UUID uuid){
         return List.of(PoaLib.perms.getPlayerGroups(null, Bukkit.getOfflinePlayer(uuid)));
     }
@@ -41,6 +49,10 @@ public class LuckPerm {
 
     public static String getPrefix(Player player){
         return PoaLib.lpAPI.getPlayerAdapter(Player.class).getMetaData(player).getPrefix();
+    }
+
+    public static String getSuffix(Player player){
+        return PoaLib.lpAPI.getPlayerAdapter(Player.class).getMetaData(player).getSuffix();
     }
 
 

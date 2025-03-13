@@ -13,4 +13,12 @@ public class EasyTabComplete {
         return tr;
     }
 
+    public static List<String> correctTabComplete(String arg, String... completions){
+        List<String> tr = new ArrayList<>();
+        for(String s : completions)
+            if(s.toLowerCase().startsWith(arg.toLowerCase()))
+                tr.add(s);
+        return tr;
+    }
+
 }

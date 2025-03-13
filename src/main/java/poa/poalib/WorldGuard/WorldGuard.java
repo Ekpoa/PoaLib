@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class WorldGuard {
 
     public static List<ProtectedRegion> getRegionsAt(Location location){
