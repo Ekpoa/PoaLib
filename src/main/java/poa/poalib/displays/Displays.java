@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MenuType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
@@ -85,6 +86,8 @@ public class Displays {
                 }
             }
         }.runTaskTimerAsynchronously(PoaLib.libINSTANCE, 0L, 1L);
+
+
     }
 
 

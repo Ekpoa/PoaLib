@@ -1,25 +1,24 @@
 package poa.poalib.economyshopgui;
 
+import jdk.jfr.Description;
 import me.gypopo.economyshopgui.api.EconomyShopGUIHook;
 import me.gypopo.economyshopgui.api.objects.BuyPrice;
 import me.gypopo.economyshopgui.api.objects.SellPrice;
 import me.gypopo.economyshopgui.util.EcoType;
 import me.gypopo.economyshopgui.util.EconomyType;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Container;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class EconomyShop {
 
-    // THIS WORKS JUST NOT INSIDE A LIB APPARENTLY
 
-    @Deprecated
-    public static double getBuyPrice(ItemStack item, OfflinePlayer player) {
+    public static double buyPrice(ItemStack item, OfflinePlayer player) {
         if(player == null)
             throw new RuntimeException("player must not be null");
 
@@ -27,12 +26,42 @@ public class EconomyShop {
         return buyPrice.map(price -> price.getPrice(EconomyType.getFromString("VAULT"))).orElse(-1.0);
     }
 
-    @Deprecated
-    public static double getSellPrice(ItemStack item, OfflinePlayer player) {
+    public static double sellPrice(ItemStack item, OfflinePlayer player) {
         final Optional<SellPrice> sellPrice = EconomyShopGUIHook.getSellPrice(player, item);
         if(sellPrice.isEmpty())
             return -1;
-        return sellPrice.get().getPrice(null);
+        return sellPrice.get().getPrice(EconomyType.getFromString("VAULT"));
     }
+
+
+
+    public static double priceOfAllItemsInChunk(Chunk chunk, boolean removeItem, OfflinePlayer player){
+        double tr = 0;
+        for (BlockState tileEntity : chunk.getTileEntities(false)) {
+            if(!(tileEntity instanceof Container container))
+                continue;
+
+
+            for (ItemStack item : container.getInventory().getStorageContents()) {
+                if(item == null || item.isEmpty())
+                    continue;
+
+                final double price = sellPrice(item, player);
+
+                // Bukkit.broadcastMessage(price + " <- " + item.getType());
+                if(price == -1 || price == 0)
+                    continue;
+
+                tr = tr + price;
+                if(removeItem)
+                    item.setAmount(0);
+            }
+        }
+
+        return tr;
+
+    }
+
+
 
 }

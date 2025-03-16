@@ -20,7 +20,7 @@ public class SpawnEntity {
                     entity.setCustomNameVisible(true);
                     entity.customName(MiniMessage.miniMessage().deserialize(miniMessageName));
                 }
-                entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
+                entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(maxHealth);
                 entity.setHealth(spawnHealth);
                 entity.setAI(hasAI);
                 entity.setGravity(hasGravity);
