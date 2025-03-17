@@ -34,26 +34,25 @@ public class EconomyShop {
     }
 
 
-
-    public static double priceOfAllItemsInChunk(Chunk chunk, boolean removeItem, OfflinePlayer player){
+    public static double priceOfAllItemsInChunk(Chunk chunk, boolean removeItem, OfflinePlayer player) {
         double tr = 0;
         for (BlockState tileEntity : chunk.getTileEntities(false)) {
-            if(!(tileEntity instanceof Container container))
+            if (!(tileEntity instanceof Container container))
                 continue;
 
 
             for (ItemStack item : container.getInventory().getStorageContents()) {
-                if(item == null || item.isEmpty())
+                if (item == null || item.isEmpty())
                     continue;
 
                 final double price = sellPrice(item, player);
 
                 // Bukkit.broadcastMessage(price + " <- " + item.getType());
-                if(price == -1 || price == 0)
+                if (price == -1 || price == 0)
                     continue;
 
                 tr = tr + price;
-                if(removeItem)
+                if (removeItem)
                     item.setAmount(0);
             }
         }
