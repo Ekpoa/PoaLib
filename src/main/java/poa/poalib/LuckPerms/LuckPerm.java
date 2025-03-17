@@ -55,6 +55,14 @@ public class LuckPerm {
         return PoaLib.lpAPI.getPlayerAdapter(Player.class).getMetaData(player).getSuffix();
     }
 
+    public static CompletableFuture<Boolean> hasPermission(UUID uuid, String permission){
+        final CompletableFuture<Boolean> future = new CompletableFuture<>();
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAcceptAsync(user -> {
+            future.complete(user.getCachedData().getPermissionData().checkPermission(permission).asBoolean());
+        });
+        return future;
+    }
+
 
 
 
