@@ -27,13 +27,13 @@ public class CreateItem {
         final ItemMeta meta = item.getItemMeta();
 
         meta.displayName(MiniMessage.miniMessage().deserialize(
-                Messages.essentialsToMinimessage(miniMessageName)
+                Messages.essentialsToMinimessage("<i:false>" + miniMessageName)
         ));
 
         if (miniMessageLore != null && !miniMessageLore.isEmpty()) {
             final List<Component> lore = miniMessageLore.stream()
                     .map(Messages::essentialsToMinimessage)
-                    .map(m -> MiniMessage.miniMessage().deserialize(m))
+                    .map(m -> MiniMessage.miniMessage().deserialize("<i:false>" + m))
                     .toList();
 
             meta.lore(lore);
