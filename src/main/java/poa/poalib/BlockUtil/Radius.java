@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Radius {
 
-    public static List<Block> getCircle(Location loc, int radius, boolean square) {
+    public static List<Location> getCircle(Location loc, int radius, boolean square) {
         World world = loc.getWorld();
         int
                 minX = loc.getBlockX() - radius,
@@ -19,27 +19,27 @@ public class Radius {
                 y = loc.getBlockY(),
                 maxZ = loc.getBlockZ() + radius;
 
-        List<Block> tr = new ArrayList<>();
+        List<Location> tr = new ArrayList<>();
 
         for (int x = minX; x <= maxX; x++)
             for (int z = minZ; z <= maxZ; z++) {
                 final Location location = new Location(world, x, y, z);
                 if (!square) {
                     if (loc.distanceSquared(loc) <= (radius * radius)) {
-                        tr.add(world.getBlockAt(location));
+                        tr.add(location);
                     }
                 }
                 else
-                    tr.add(world.getBlockAt(location));
+                    tr.add(location);
             }
 
         return tr;
     }
-    public static List<Block> getCircle(Location loc, int radius){
+    public static List<Location> getCircle(Location loc, int radius){
         return getCircle(loc, radius, false);
     }
 
-    public static List<Block> getSquare(Location loc, int radius){
+    public static List<Location> getSquare(Location loc, int radius){
         return getCircle(loc, radius, true);
     }
 

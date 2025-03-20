@@ -22,26 +22,6 @@ import java.util.*;
 public class CreateItem {
 
 
-    public static ItemStack createBasicItem(Material material, int amount, String miniMessageName) {
-        ItemStack item = new ItemStack(material, amount);
-        ItemMeta meta = item.getItemMeta();
-        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false>" + miniMessageName));
-        item.setItemMeta(meta);
-        return item;
-    }
-
-    public static ItemStack createBasicItemWithLore(Material material, int amount, String miniMessageName, List<String> miniMessageStringList) {
-        ItemStack item = new ItemStack(material, amount);
-        ItemMeta meta = item.getItemMeta();
-        meta.displayName(MiniMessage.miniMessage().deserialize("<i:false>" + miniMessageName));
-
-        meta.lore(stringListToComponent(miniMessageStringList));
-
-        item.setItemMeta(meta);
-        return item;
-    }
-
-
     public static ItemStack createAdvancedItem(Material material, int amount, String miniMessageName, List<String> miniMessageStringList, String nbtKey, String nbtValue) {
         ItemStack item = new ItemStack(material, amount);
         ItemMeta meta = item.getItemMeta();
@@ -53,11 +33,54 @@ public class CreateItem {
 
         item.setItemMeta(meta);
 
-        NBT.modify(item, nbt -> {
-            nbt.setString(nbtKey, nbtValue);
-        });
+        if(nbtKey != null && nbtValue != null) {
+            NBT.modify(item, nbt -> {
+                nbt.setString(nbtKey, nbtValue);
+            });
+        }
         return item;
     }
+
+
+
+    public static ItemStack createBasicItem(Material material, int amount, String miniMessageName) {
+        return createAdvancedItem(material, amount, miniMessageName, null, null, null);
+    }
+
+    public static ItemStack createBasicItem(Material material, String miniMessageName) {
+        return createAdvancedItem(material, 1, miniMessageName, null, null, null);
+    }
+
+
+
+    public static ItemStack createBasicItemWithLore(Material material, int amount, String miniMessageName, List<String> miniMessageStringList) {
+        return createAdvancedItem(material, amount, miniMessageName, miniMessageStringList, null, null);
+    }
+
+    public static ItemStack createBasicItemWithLore(Material material, String miniMessageName, List<String> miniMessageStringList) {
+        return createAdvancedItem(material, 1, miniMessageName, miniMessageStringList, null, null);
+    }
+
+
+    public static ItemStack createBasicItemWithLore(Material material, int amount, String miniMessageName, String... miniMessageStringList) {
+        return createAdvancedItem(material, amount, miniMessageName, Arrays.stream(miniMessageStringList).toList(), null, null);
+    }
+
+    public static ItemStack createBasicItemWithLore(Material material, String miniMessageName, String... miniMessageStringList) {
+        return createAdvancedItem(material, 1, miniMessageName, Arrays.stream(miniMessageStringList).toList(), null, null);
+    }
+
+
+    public static ItemStack blackGlass(){
+        final ItemStack itemStack = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        final ItemMeta meta = itemStack.getItemMeta();
+        meta.setHideTooltip(true);
+        itemStack.setItemMeta(meta);
+        return itemStack;
+    }
+
+
+
 
 
     public static List<Component> stringListToComponent(List<String> list) {
