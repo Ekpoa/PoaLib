@@ -5,6 +5,7 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("ALL")
 public class WorldGuard {
@@ -79,6 +81,32 @@ public class WorldGuard {
         }
         return blocksInRegion;
     }
+
+
+    public static Location getRandomLocationInRegion(String regionName, World world) {
+        RegionContainer container = WorldGuardMain.regionContainer;
+        RegionManager regionManager = container.get(BukkitAdapter.adapt(world));
+
+        if (regionManager == null) return null;
+
+        ProtectedRegion region = regionManager.getRegion(regionName);
+        if (region == null) return null;
+
+        BlockVector3 min = region.getMinimumPoint();
+        BlockVector3 max = region.getMaximumPoint();
+
+        int x = ThreadLocalRandom.current().nextInt(min.getX(), max.getX() + 1);
+        int y = ThreadLocalRandom.current().nextInt(min.getY(), max.getY() + 1);
+        int z = ThreadLocalRandom.current().nextInt(min.getZ(), max.getZ() + 1);
+
+        final Location location = new Location(world, x + 0.5, y, z + 0.5);
+
+        if(!getRegionsAtAsString(location).contains(regionName))
+            return getRandomLocationInRegion(regionName, world);
+
+        return location;
+    }
+
 
 
 

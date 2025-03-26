@@ -7,6 +7,7 @@ poa/poalib/Messages/Messages.class
 poa/poalib/WorldGuard/Events/RegionChangeEvent.class
 poa/poalib/Webhooks/DiscordWebhook$JSONObject.class
 poa/poalib/WorldGuard/WorldGuard.class
+poa/poalib/Math/Maths.class
 poa/poalib/Commands/TimeInput.class
 poa/poalib/Webhooks/DiscordWebhook$EmbedObject$Field.class
 poa/poalib/BlockUtil/BlockMarker.class
