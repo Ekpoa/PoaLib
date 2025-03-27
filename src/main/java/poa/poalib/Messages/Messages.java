@@ -138,16 +138,16 @@ public class Messages {
         return smallCaps.toString();
     }
 
-    public static String progressBar(int amount, int outOf, int total) {
+    public static String progressBar(int lines, int outOf, int total) {
         int percent = (int) Math.round((outOf / (double) total) * 100);
 
         percent = Math.min(percent, 100);
 
-        int greenSymbols = (int) Math.round((percent / 100.0) * amount);
+        int greenSymbols = (int) Math.round((percent / 100.0) * lines);
 
         StringBuilder progressBar = new StringBuilder();
 
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < lines; i++) {
             if (i < greenSymbols) {
                 progressBar.append("§a|");
             } else {
@@ -156,6 +156,10 @@ public class Messages {
         }
 
         return progressBar.toString();
+    }
+
+    public static String progressBarMiniMessage(int lines, int outOf, int total){
+        return progressBar(lines, outOf, total).replaceAll("§c", "<red>").replaceAll("§a", "<green>");
     }
 
     public static long convertToSeconds(String duration) {
