@@ -7,12 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import poa.poalib.Commands.TestCommand;
-import poa.poalib.Messages.PlaceHolderEvent;
-import poa.poalib.WorldGuard.Events.PlayerMoveListener;
-import poa.poalib.WorldGuard.WorldGuardMain;
+import poa.poalib.commands.TestCommand;
+import poa.poalib.messages.PlaceHolderEvent;
+import poa.poalib.worldguard.events.PlayerMoveListener;
+import poa.poalib.worldguard.WorldGuardMain;
 
-import javax.print.DocFlavor;
 import java.util.logging.Level;
 
 public final class PoaLib extends JavaPlugin {

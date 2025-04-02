@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import poa.poalib.Items.CreateItem;
+import poa.poalib.items.CreateItem;
 import poa.poalib.PoaLib;
 
 import java.io.File;
