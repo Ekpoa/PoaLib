@@ -6,6 +6,7 @@ poa/poalib/displays/Displays.class
 poa/poalib/luckperms/LuckPerm.class
 poa/poalib/blockutil/BlockMarker.class
 poa/poalib/math/Cardial.class
+poa/poalib/blockutil/Locations.class
 poa/poalib/tabcomplete/EasyTabComplete.class
 poa/poalib/messages/PlaceHolderEvent.class
 poa/poalib/blockutil/CurveLocation.class

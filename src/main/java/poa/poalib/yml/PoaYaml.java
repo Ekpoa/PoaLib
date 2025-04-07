@@ -43,6 +43,16 @@ public class PoaYaml extends YamlConfiguration {
         this.set(node, list);
     }
 
+    public void removeStringList(String node, String string) {
+        List<String> list = new ArrayList<>();
+        if (this.isSet(node))
+            list = this.getStringList(node);
+
+        list.remove(string);
+
+        this.set(node, list);
+    }
+
     public void setUUID(String node, UUID uuid){
         this.set(node, uuid.toString());
     }
@@ -122,11 +132,18 @@ public class PoaYaml extends YamlConfiguration {
 
 
     @SneakyThrows
-    public static PoaYaml loadFromFile(File file) {
+    public static PoaYaml loadFromFile(File file, boolean createFile) {
+        if(createFile)
+            file.createNewFile();
         PoaYaml config = new PoaYaml();
         config.load(file);
         return config;
     }
+    public static PoaYaml loadFromFile(File file) {
+        return loadFromFile(file, false);
+    }
+
+
 
 
 }
