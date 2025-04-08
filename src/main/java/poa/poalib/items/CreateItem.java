@@ -52,6 +52,10 @@ public class CreateItem {
         return createItem(material, 1, miniMessageName, miniMessageLore, nbtKey, nbtValue);
     }
 
+    public static ItemStack createItem(Material material, String miniMessageName, String nbtKey, Object nbtValue, String... miniMessageLore){
+        return createItem(material, 1, miniMessageName, Arrays.stream(miniMessageLore).toList(), nbtKey, nbtValue);
+    }
+
     public static ItemStack createItem(Material material, int amount, String miniMessageName, List<String> miniMessageLore){
         return createItem(material, amount, miniMessageName, miniMessageLore, null, null);
     }
