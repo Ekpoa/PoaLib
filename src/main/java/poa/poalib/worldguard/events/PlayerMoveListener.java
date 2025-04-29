@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import poa.poalib.worldguard.RegionAt;
 
 import java.util.ArrayList;
@@ -18,26 +19,38 @@ public class PlayerMoveListener implements Listener {
 
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
-        // Assume getRegionsAtPlayer() is the method that returns the list of regions for a player
-        List<String> currentRegions = getRegionsAtPlayer(event.getPlayer());
+    public void onPlayerMove(PlayerMoveEvent e) {
+        final Player player = e.getPlayer();
+        List<String> currentRegions = getRegionsAtPlayer(player);
 
-        // You need to store the previous regions of the player somewhere, for comparison
-        List<String> previousRegions = getPreviousRegions(event.getPlayer());
+        List<String> previousRegions = getPreviousRegions(player);
 
         if (!currentRegions.equals(previousRegions)) {
-            // Player has entered a new region, fire the custom event
-            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(event.getPlayer(), currentRegions);
+            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions);
             Bukkit.getServer().getPluginManager().callEvent(regionEnterEvent);
 
-            // Update the previous regions
-            setPreviousRegions(event.getPlayer(), currentRegions);
+            setPreviousRegions(player, currentRegions);
         }
     }
 
 
     Map<Player, List<String>> previousRegions = new HashMap<>();
 
+    
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent e){
+        final Player player = e.getPlayer();
+        List<String> currentRegions = getRegionsAtPlayer(player);
+
+        List<String> previousRegions = getPreviousRegions(player);
+
+        if (!currentRegions.equals(previousRegions)) {
+            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions);
+            Bukkit.getServer().getPluginManager().callEvent(regionEnterEvent);
+
+            setPreviousRegions(player, currentRegions);
+        }
+    }
 
 
     // You need to implement these methods to track the player's previous regions

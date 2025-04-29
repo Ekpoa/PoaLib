@@ -6,11 +6,13 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,33 +21,31 @@ import java.util.concurrent.ThreadLocalRandom;
 @SuppressWarnings("ALL")
 public class WorldGuard {
 
-    public static List<ProtectedRegion> getRegionsAt(Location location){
+    public static List<ProtectedRegion> getRegionsAt(Location location) {
         List<ProtectedRegion> regions = new ArrayList<>();
 
         RegionManager manager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(location.getWorld()));
         ApplicableRegionSet regionSet = manager.getApplicableRegions(BukkitAdapter.asBlockVector(location));
-        for(ProtectedRegion region : regionSet)
+        for (ProtectedRegion region : regionSet)
             regions.add(region);
 
         return regions;
     }
 
-    public static List<String> getRegionsAtAsString(Location location){
+    public static List<String> getRegionsAtAsString(Location location) {
         List<String> tr = new ArrayList<>();
-        for(ProtectedRegion region : getRegionsAt(location))
+        for (ProtectedRegion region : getRegionsAt(location))
             tr.add(region.getId());
 
         return tr;
     }
 
-    public static boolean canBuild(Player player, Location location){
-        if(player.hasPermission("worldguard.region.bypass." + location.getWorld().getName()))
+    public static boolean canBuild(Player player, Location location) {
+        if (player.hasPermission("worldguard.region.bypass." + location.getWorld().getName()))
             return true;
 
         return WorldGuardMain.regionQuery.testBuild(BukkitAdapter.adapt(location), WorldGuardMain.worldGuardPlugin.wrapPlayer(player));
     }
-
-
 
 
     public static List<Block> getBlocksInRegion(String regionId, World world, boolean includeAir) {
@@ -55,7 +55,6 @@ public class WorldGuard {
 
         if (region == null)
             return blocksInRegion;
-
 
 
         BlockVector3 min = region.getMinimumPoint();
@@ -68,11 +67,10 @@ public class WorldGuard {
 
                     if (RegionAt.getRegionsAtAsString(block.getLocation()).contains(regionId)) {
                         Material type = block.getType();
-                        if(List.of(Material.AIR, Material.VOID_AIR, Material.CAVE_AIR).contains(type)) {
+                        if (List.of(Material.AIR, Material.VOID_AIR, Material.CAVE_AIR).contains(type)) {
                             if (includeAir)
                                 blocksInRegion.add(block);
-                        }
-                        else
+                        } else
                             blocksInRegion.add(block);
                     }
 
@@ -80,6 +78,38 @@ public class WorldGuard {
             }
         }
         return blocksInRegion;
+    }
+
+    public static List<Chunk> getRegionChunks(World world, String regionName) {
+        RegionManager regionManager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
+        ProtectedRegion region = regionManager.getRegion(regionName);
+
+        if (region == null)
+            return null;
+
+        BlockVector3 min = region.getMinimumPoint();
+        BlockVector3 max = region.getMaximumPoint();
+
+        double y = min.y() + 0.2;
+
+        List<Chunk> chunks = new ArrayList<>();
+
+        for (int x = min.getBlockX(); x <= max.getBlockX(); x++) {
+            for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++) {
+                Location location = new Location(world, x, y, z);
+                Block block = location.getBlock();
+
+                if (RegionAt.getRegionsAtAsString(block.getLocation()).contains(regionName)) {
+                    final Chunk chunk = block.getChunk();
+                    if(!chunks.contains(chunk))
+                        chunks.add(chunk);
+                }
+
+
+            }
+        }
+
+        return chunks;
     }
 
 
@@ -101,15 +131,11 @@ public class WorldGuard {
 
         final Location location = new Location(world, x + 0.5, y, z + 0.5);
 
-        if(!getRegionsAtAsString(location).contains(regionName))
+        if (!getRegionsAtAsString(location).contains(regionName))
             return getRandomLocationInRegion(regionName, world);
 
         return location;
     }
-
-
-
-
 
 
 }
