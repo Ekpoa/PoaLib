@@ -81,6 +81,15 @@ public class CreateItem {
     }
 
 
+    public static void glowItem(ItemStack itemStack, boolean glow){
+        final ItemMeta meta = itemStack.getItemMeta();
+        meta.setEnchantmentGlintOverride(glow);
+        itemStack.setItemMeta(meta);
+    }
+
+    public static void glowItem(ItemStack itemStack){
+        glowItem(itemStack, true);
+    }
 
 
 
