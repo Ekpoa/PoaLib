@@ -6,6 +6,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -210,5 +212,27 @@ public class Messages {
     public static Component componentActual(net.minecraft.network.chat.Component nms) {
         return PaperAdventure.WRAPPER_AWARE_SERIALIZER.deserialize(nms);
     }
+
+
+
+    public static List<String> rotateBold(String input, String colorCode) {
+        String stripped = input.replace(colorCode, "").replace("&l", "");
+        List<String> result = new ArrayList<>();
+
+        for (int i = 0; i < stripped.length(); i++) {
+            StringBuilder sb = new StringBuilder(colorCode);
+            for (int j = 0; j < stripped.length(); j++) {
+                if (j == i) {
+                    sb.append("&l").append(stripped.charAt(j));
+                } else {
+                    sb.append(colorCode).append(stripped.charAt(j));
+                }
+            }
+            result.add(sb.toString());
+        }
+
+        return result;
+    }
+
 
 }

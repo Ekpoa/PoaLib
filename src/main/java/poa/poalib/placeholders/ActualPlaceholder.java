@@ -29,7 +29,8 @@ public class ActualPlaceholder extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
-        final CustomPlaceholderEvent event = new CustomPlaceholderEvent(params);
+        final boolean isAsync = !Bukkit.isPrimaryThread();
+        final CustomPlaceholderEvent event = new CustomPlaceholderEvent(params, isAsync);
         pluginManager.callEvent(event);
 
         return event.getOutput();

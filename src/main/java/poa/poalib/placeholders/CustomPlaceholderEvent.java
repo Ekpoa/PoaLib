@@ -16,7 +16,8 @@ public class CustomPlaceholderEvent extends Event {
     String id;
     String output;
 
-    public CustomPlaceholderEvent(String id) {
+    public CustomPlaceholderEvent(String id, boolean async) {
+        super(async);
         this.id = id;
     }
 
