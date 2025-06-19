@@ -1,19 +1,20 @@
-package poa.poalib.messages;
+package poa.poalib.placeholders;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.PluginManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.concurrent.ConcurrentHashMap;
+public class ActualPlaceholder extends PlaceholderExpansion {
 
-public class PlaceHolderEvent extends PlaceholderExpansion {
+    private static final PluginManager pluginManager = Bukkit.getPluginManager();
 
-    public static ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<>();
 
     @Override
     public @NotNull String getIdentifier() {
-        return "poa";
+        return "poalib";
     }
 
     @Override
@@ -28,9 +29,9 @@ public class PlaceHolderEvent extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
-        if(map.containsKey(params))
-            return map.get(params) + "";
+        final CustomPlaceholderEvent event = new CustomPlaceholderEvent(params);
+        pluginManager.callEvent(event);
 
-        return null;
+        return event.getOutput();
     }
 }

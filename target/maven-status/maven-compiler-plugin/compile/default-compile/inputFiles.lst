@@ -12,6 +12,7 @@
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/commands/TimeInput.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/items/Attributes.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/entity/SpawnEntity.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/placeholders/ActualPlaceholder.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/blockutil/CurveLocation.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/general/General.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/worldguard/events/PlayerMoveListener.java
@@ -33,5 +34,5 @@
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/items/ItemNullCheck.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/worldguard/WorldGuard.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/vector/Vectors.java
-/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/messages/PlaceHolderEvent.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/placeholders/CustomPlaceholderEvent.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/math/Maths.java

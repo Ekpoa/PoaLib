@@ -8,9 +8,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import poa.poalib.commands.TestCommand;
-import poa.poalib.messages.PlaceHolderEvent;
-import poa.poalib.worldguard.events.PlayerMoveListener;
+import poa.poalib.placeholders.ActualPlaceholder;
 import poa.poalib.worldguard.WorldGuardMain;
+import poa.poalib.worldguard.events.PlayerMoveListener;
 
 import java.util.logging.Level;
 
@@ -35,7 +35,6 @@ public final class PoaLib extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerMoveListener(), this);
 
-        new PlaceHolderEvent().register();
 
         try {
 
@@ -49,6 +48,9 @@ public final class PoaLib extends JavaPlugin {
 
 
         getCommand("poalibtestcommand").setExecutor(new TestCommand());
+
+        new ActualPlaceholder().register();
+
     }
 
 

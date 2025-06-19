@@ -4,6 +4,7 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import org.bukkit.Chunk;
@@ -16,6 +17,7 @@ import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("ALL")
@@ -52,7 +54,6 @@ public class WorldGuard {
         List<Block> blocksInRegion = new ArrayList<>();
         RegionManager regionManager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
         ProtectedRegion region = regionManager.getRegion(regionId);
-
         if (region == null)
             return blocksInRegion;
 
@@ -135,6 +136,36 @@ public class WorldGuard {
             return getRandomLocationInRegion(regionName, world);
 
         return location;
+    }
+
+    public static Location[] getRegionCorners(World world, String regionId) {
+        final RegionContainer container = WorldGuardMain.regionContainer;
+        RegionManager manager = container.get(BukkitAdapter.adapt(world));
+        if (manager == null) return null;
+
+        ProtectedRegion region = manager.getRegion(regionId);
+        if (!(region instanceof ProtectedCuboidRegion cuboid)) return null;
+
+        BlockVector3 min = cuboid.getMinimumPoint();
+        BlockVector3 max = cuboid.getMaximumPoint();
+
+        Location loc1 = new Location(world, min.getBlockX(), min.getBlockY(), min.getBlockZ());
+        Location loc2 = new Location(world, max.getBlockX(), max.getBlockY(), max.getBlockZ());
+
+        return new Location[]{loc1, loc2};
+    }
+
+    public static List<String> getRegions(World world) {
+        final RegionContainer container = WorldGuardMain.regionContainer;
+        RegionManager manager = container.get(BukkitAdapter.adapt(world));
+
+        if (manager == null) return List.of();
+
+        final Map<String, ProtectedRegion> regions = manager.getRegions();
+        if (regions.isEmpty())
+            return List.of();
+
+        return new ArrayList<>(regions.keySet());
     }
 
 
