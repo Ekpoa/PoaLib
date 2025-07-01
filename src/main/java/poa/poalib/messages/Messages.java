@@ -3,6 +3,7 @@ package poa.poalib.messages;
 import io.papermc.paper.adventure.PaperAdventure;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.OfflinePlayer;
 
 import java.text.DecimalFormat;
@@ -211,6 +212,10 @@ public class Messages {
 
     public static Component componentActual(net.minecraft.network.chat.Component nms) {
         return PaperAdventure.WRAPPER_AWARE_SERIALIZER.deserialize(nms);
+    }
+
+    public static Component simpleComponent(String string){
+        return MiniMessage.miniMessage().deserialize(Messages.essentialsToMinimessage(string));
     }
 
 
