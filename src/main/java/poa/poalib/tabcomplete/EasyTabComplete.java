@@ -13,6 +13,10 @@ public class EasyTabComplete {
         return tr;
     }
 
+    public static List<String> correctTabComplete(String arg, List<String> list){
+        return correctTabComplete(list, arg);
+    }
+
     public static List<String> correctTabComplete(String arg, String... completions){
         List<String> tr = new ArrayList<>();
         for(String s : completions)
@@ -20,5 +24,7 @@ public class EasyTabComplete {
                 tr.add(s);
         return tr;
     }
+
+
 
 }

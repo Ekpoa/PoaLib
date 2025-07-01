@@ -43,11 +43,11 @@ public class BlockUtil {
 
     public static List<Block> blocksInBoundingBox(BoundingBox box, World world){
         List<Block> tr = new ArrayList<>();
-
         for(double x = box.getMinX(); x < box.getMaxX(); x++)
             for(double y = box.getMinY(); y < box.getMaxY(); y++)
                 for(double z = box.getMinZ(); z < box.getMaxZ(); z++)
                     tr.add(world.getBlockAt(new Location(world,x,y,z)));
+
 
         return tr;
     }

@@ -7,18 +7,18 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.units.qual.C;
+import poa.poalib.PoaLib;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SuppressWarnings("ALL")
 public class WorldGuard {
@@ -81,6 +81,61 @@ public class WorldGuard {
         return blocksInRegion;
     }
 
+    public static CompletableFuture<List<Block>> getBlocksInRegion(String regionId, World world, boolean includeAir, long timeToTake) {
+        CompletableFuture<List<Block>> future = new CompletableFuture<>();
+        List<Block> blocksInRegion = new ArrayList<>();
+
+        RegionManager regionManager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
+        ProtectedRegion region = regionManager.getRegion(regionId);
+        if (region == null) {
+            future.complete(null);
+            return future;
+        }
+
+        BlockVector3 min = region.getMinimumPoint();
+        BlockVector3 max = region.getMaximumPoint();
+
+        int xMin = min.getBlockX(), xMax = max.getBlockX();
+        int yMin = min.getBlockY(), yMax = max.getBlockY();
+        int zMin = min.getBlockZ(), zMax = max.getBlockZ();
+
+        int totalX = xMax - xMin + 1;
+        int xPerTick = Math.max(1, totalX / (int) timeToTake);
+        AtomicInteger currentX = new AtomicInteger(xMin);
+
+        Bukkit.getScheduler().runTaskTimer(PoaLib.libINSTANCE, task -> {
+            int startX = currentX.get();
+            int endX = Math.min(startX + xPerTick - 1, xMax);
+
+            for (int x = startX; x <= endX; x++) {
+                for (int y = yMin; y <= yMax; y++) {
+                    for (int z = zMin; z <= zMax; z++) {
+                        Block block = new Location(world, x, y, z).getBlock();
+                        if (RegionAt.getRegionsAtAsString(block.getLocation()).contains(regionId)) {
+                            Material type = block.getType();
+                            if (type.isAir()) {
+                                if (includeAir) blocksInRegion.add(block);
+                            } else {
+                                blocksInRegion.add(block);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (endX >= xMax) {
+                task.cancel();
+                future.complete(blocksInRegion);
+            } else {
+                currentX.set(endX + 1);
+            }
+        }, 0L, 1L);
+
+        return future;
+    }
+
+
+
     public static List<Chunk> getRegionChunks(World world, String regionName) {
         RegionManager regionManager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
         ProtectedRegion region = regionManager.getRegion(regionName);
@@ -105,8 +160,6 @@ public class WorldGuard {
                     if(!chunks.contains(chunk))
                         chunks.add(chunk);
                 }
-
-
             }
         }
 

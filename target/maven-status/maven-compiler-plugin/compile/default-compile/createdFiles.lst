@@ -45,3 +45,4 @@ poa/poalib/webooks/DiscordWebhook$JSONObject.class
 poa/poalib/messages/Messages.class
 poa/poalib/PoaLib.class
 poa/poalib/webooks/DiscordWebhook.class
+poa/poalib/nmsrelated/SetFast.class
