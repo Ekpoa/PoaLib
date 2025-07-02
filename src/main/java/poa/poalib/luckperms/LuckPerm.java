@@ -2,6 +2,7 @@ package poa.poalib.luckperms;
 
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
+import net.luckperms.api.node.types.PrefixNode;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
@@ -60,6 +61,17 @@ public class LuckPerm {
         return future;
     }
 
+    public static void setPrefix(Player player, String prefix){
+        PoaLib.lpAPI.getUserManager().loadUser(player.getUniqueId()).thenAccept(user -> {
+            user.data().clear(node -> node instanceof PrefixNode);
+
+            PrefixNode prefixNode = PrefixNode.builder(prefix, 100).build(); // 100 = priority
+
+            user.data().add(prefixNode);
+
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
 
 
 

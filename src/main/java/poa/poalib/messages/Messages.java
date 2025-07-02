@@ -220,6 +220,9 @@ public class Messages {
 
 
 
+    
+
+
     public static List<String> rotateBold(String input, String colorCode) {
         String stripped = input.replace(colorCode, "").replace("&l", "");
         List<String> result = new ArrayList<>();
