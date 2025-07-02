@@ -61,8 +61,8 @@ public class LuckPerm {
         return future;
     }
 
-    public static void setPrefix(Player player, String prefix){
-        PoaLib.lpAPI.getUserManager().loadUser(player.getUniqueId()).thenAccept(user -> {
+    public static void setPrefix(UUID uuid, String prefix){
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAccept(user -> {
             user.data().clear(node -> node instanceof PrefixNode);
 
             PrefixNode prefixNode = PrefixNode.builder(prefix, 100).build(); // 100 = priority
