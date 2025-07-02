@@ -1,8 +1,10 @@
 package poa.poalib.luckperms;
 
+import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.node.types.PrefixNode;
+import net.luckperms.api.query.QueryOptions;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
@@ -47,6 +49,19 @@ public class LuckPerm {
 
     public static String getPrefix(Player player){
         return PoaLib.lpAPI.getPlayerAdapter(Player.class).getMetaData(player).getPrefix();
+    }
+
+    public static CompletableFuture<String> getPrefix(UUID uuid){
+        CompletableFuture<String> future = new CompletableFuture<>();
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAccept(user -> {
+            QueryOptions queryOptions = PoaLib.lpAPI.getContextManager().getStaticQueryOptions();
+            CachedMetaData meta = user.getCachedData().getMetaData(queryOptions);
+
+            String prefix = meta.getPrefix();
+
+            future.complete(prefix != null ? prefix : "");
+        });
+        return future;
     }
 
     public static String getSuffix(Player player){
