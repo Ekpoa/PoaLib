@@ -88,6 +88,15 @@ public class LuckPerm {
         });
     }
 
+    public static void clearPrefix(UUID uuid){
+        PoaLib.lpAPI.getUserManager().loadUser(uuid).thenAccept(user -> {
+            // Remove all prefix nodes
+            user.data().clear(node -> node instanceof PrefixNode);
+
+            // Save the user
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
 
 
 
