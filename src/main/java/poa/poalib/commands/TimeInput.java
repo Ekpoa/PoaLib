@@ -17,7 +17,7 @@ public class TimeInput {
                 case 's' -> milliseconds = timeValue * 1000L;
             }
         } else {
-            throw new IllegalArgumentException("Invalid time frame format. Use a number followed by 'h', 'm', or 's'.");
+            throw new IllegalArgumentException("Invalid time frame format. Use a number followed by 'w' 'd' 'h', 'm', or 's'" + "   " + timeFrame);
         }
 
         return milliseconds;
