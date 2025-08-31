@@ -29,6 +29,7 @@ poa/poalib/entity/SpawnEntity.class
 poa/poalib/commands/TimeInput.class
 poa/poalib/webooks/DiscordWebhook$EmbedObject$Image.class
 poa/poalib/displays/Displays$1.class
+poa/poalib/nmsrelated/Biomes$ChunkWork.class
 poa/poalib/displays/Displays.class
 poa/poalib/blockutil/CurveLocation.class
 poa/poalib/math/Cardial$Cardinal.class
