@@ -8,6 +8,7 @@ poa/poalib/math/Cardial.class
 poa/poalib/blockutil/Locations.class
 poa/poalib/tabcomplete/EasyTabComplete.class
 poa/poalib/webooks/DiscordWebhook$EmbedObject$Thumbnail.class
+poa/poalib/nmsrelated/RefreshChunks.class
 poa/poalib/math/Maths.class
 poa/poalib/nmsrelated/EntityNMS.class
 poa/poalib/worldguard/WorldGuardMain.class
