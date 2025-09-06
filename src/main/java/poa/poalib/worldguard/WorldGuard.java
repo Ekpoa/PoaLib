@@ -136,35 +136,26 @@ public class WorldGuard {
 
 
 
-    public static List<Chunk> getRegionChunks(World world, String regionName) {
-        RegionManager regionManager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
-        ProtectedRegion region = regionManager.getRegion(regionName);
+    public static List<Chunk> getRegionChunksCuboid(World world, ProtectedCuboidRegion cuboid, boolean loadedOnly) {
+        BlockVector3 min = cuboid.getMinimumPoint();
+        BlockVector3 max = cuboid.getMaximumPoint();
 
-        if (region == null)
-            return null;
+        int cMinX = Math.floorDiv(min.getBlockX(), 16);
+        int cMaxX = Math.floorDiv(max.getBlockX(), 16);
+        int cMinZ = Math.floorDiv(min.getBlockZ(), 16);
+        int cMaxZ = Math.floorDiv(max.getBlockZ(), 16);
 
-        BlockVector3 min = region.getMinimumPoint();
-        BlockVector3 max = region.getMaximumPoint();
-
-        double y = min.y() + 0.2;
-
-        List<Chunk> chunks = new ArrayList<>();
-
-        for (int x = min.getBlockX(); x <= max.getBlockX(); x++) {
-            for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++) {
-                Location location = new Location(world, x, y, z);
-                Block block = location.getBlock();
-
-                if (RegionAt.getRegionsAtAsString(block.getLocation()).contains(regionName)) {
-                    final Chunk chunk = block.getChunk();
-                    if(!chunks.contains(chunk))
-                        chunks.add(chunk);
+        List<Chunk> out = new ArrayList<>((cMaxX - cMinX + 1) * (cMaxZ - cMinZ + 1));
+        for (int cx = cMinX; cx <= cMaxX; cx++) {
+            for (int cz = cMinZ; cz <= cMaxZ; cz++) {
+                if (!loadedOnly || world.isChunkLoaded(cx, cz)) {
+                    out.add(world.getChunkAt(cx, cz)); // note: this loads the chunk if not loadedOnly
                 }
             }
         }
-
-        return chunks;
+        return out;
     }
+
 
 
     public static Location getRandomLocationInRegion(String regionName, World world) {
