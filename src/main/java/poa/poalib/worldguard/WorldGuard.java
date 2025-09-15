@@ -156,6 +156,23 @@ public class WorldGuard {
         return out;
     }
 
+    public static ProtectedCuboidRegion getCuboidRegion(World world, String regionName) {
+        RegionManager regionManager = com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer()
+                .get(BukkitAdapter.adapt(world));
+
+        if (regionManager == null) {
+            return null; // No regions available in this world
+        }
+
+        ProtectedRegion region = regionManager.getRegion(regionName);
+        if (region instanceof ProtectedCuboidRegion cuboid) {
+            return cuboid; // Cast is safe here
+        }
+
+        return null; // Region not found or not a cuboid
+    }
+
+
 
 
     public static Location getRandomLocationInRegion(String regionName, World world) {
