@@ -26,7 +26,6 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import poa.poalib.PoaLib;
 
 import java.lang.reflect.Constructor;
@@ -52,12 +51,10 @@ public class Biomes {
         if (plugin == null || viewer == null || a == null || b == null) return;
         if (!a.getWorld().equals(b.getWorld()) || !a.getWorld().equals(viewer.getWorld())) return;
 
-        // We'll capture everything we need from main, then compute/serialize async, then send on main.
         Bukkit.getScheduler().runTask(plugin, () -> {
             ServerPlayer nmsPlayer = ((CraftPlayer) viewer).getHandle();
             ServerLevel level = ((CraftWorld) a.getWorld()).getHandle();
 
-            // Bounds (block coords)
             int minX = Math.min(a.getBlockX(), b.getBlockX());
             int maxX = Math.max(a.getBlockX(), b.getBlockX());
             int minY = Math.max(level.getMinY(), Math.min(a.getBlockY(), b.getBlockY()));
@@ -65,14 +62,11 @@ public class Biomes {
             int minZ = Math.min(a.getBlockZ(), b.getBlockZ());
             int maxZ = Math.max(a.getBlockZ(), b.getBlockZ());
 
-            // Resolve target biome holder on main
             Holder<net.minecraft.world.level.biome.Biome> TARGET = resolveBiomeHolder(level, biomeName);
 
-            // Chunk ranges
             int cMinX = Math.floorDiv(minX, 16), cMaxX = Math.floorDiv(maxX, 16);
             int cMinZ = Math.floorDiv(minZ, 16), cMaxZ = Math.floorDiv(maxZ, 16);
 
-            // Prepare "work items": per-chunk PalettedContainer copies (detached data)
             int worldMinY = level.getMinY();
 
             List<ChunkWork> work = new ArrayList<>();
@@ -99,17 +93,14 @@ public class Biomes {
                 }
             }
 
-            // Prepare ctor reflection once (main thread) and pass to async
             Constructor<?> cbdListCtor  = getChunkBiomeDataListCtor();
             Constructor<?> cbdBytesCtor = getChunkBiomeDataBytesCtor();
 
-            // Off-thread: mutate the copies within AABB & build ChunkBiomeData objects
             CompletableFuture
                     .supplyAsync(() -> buildChunkBiomeDatasAsync(work, TARGET,
                             minX, minY, minZ, maxX, maxY, maxZ, worldMinY, cbdListCtor, cbdBytesCtor))
                     .thenAccept(chunkDatas -> {
                         if (chunkDatas.isEmpty()) return;
-                        // Back to main: send packet
                         Bukkit.getScheduler().runTask(plugin, () -> {
                             ClientboundChunksBiomesPacket pkt =
                                     new ClientboundChunksBiomesPacket(castUncheckedList(chunkDatas));
@@ -129,7 +120,6 @@ public class Biomes {
         ServerPlayer nmsPlayer = ((CraftPlayer) viewer).getHandle();
         ServerLevel level = ((CraftWorld) a.getWorld()).getHandle();
 
-        // Bounds
         int minX = Math.min(a.getBlockX(), b.getBlockX());
         int maxX = Math.max(a.getBlockX(), b.getBlockX());
         int minY = Math.max(level.getMinY(), Math.min(a.getBlockY(), b.getBlockY()));
@@ -182,7 +172,6 @@ public class Biomes {
         }
     }
 
-    // ===== Async heavy work (mutate copies and make CBD objects) =====
     private static List<Object> buildChunkBiomeDatasAsync(
             List<ChunkWork> work,
             Holder<net.minecraft.world.level.biome.Biome> TARGET,
@@ -199,7 +188,6 @@ public class Biomes {
 
             List<PalettedContainer<Holder<net.minecraft.world.level.biome.Biome>>> copies = w.sectionCopies;
 
-            // mutate per section within AABB
             for (int si = 0; si < copies.size(); si++) {
                 PalettedContainer<Holder<net.minecraft.world.level.biome.Biome>> copy = copies.get(si);
                 int secMinY = worldMinY + si * 16;
@@ -223,7 +211,6 @@ public class Biomes {
                             copy.set(sx, sy, sz, TARGET);
             }
 
-            // build ChunkBiomeData via whichever ctor exists
             Object cbd;
             if (cbdListCtor != null) {
                 List<PalettedContainerRO<Holder<net.minecraft.world.level.biome.Biome>>> asRO = new ArrayList<>(copies);
@@ -250,18 +237,15 @@ public class Biomes {
     }
 
     @SneakyThrows
-    // ===== Biome resolver with normalization (lowercase, spaces->underscores, default namespace) =====
     private static Holder<net.minecraft.world.level.biome.Biome> resolveBiomeHolder(ServerLevel level, String biomeName) {
         String idStr = (biomeName == null ? "" : biomeName.trim())
                 .toLowerCase(Locale.ROOT)
                 .replace(' ', '_');
 
-        // Default namespace if missing
         if (!idStr.contains(":")) {
             idStr = "minecraft:" + idStr;
         }
 
-        // Now parse safely
         net.minecraft.resources.ResourceLocation id = net.minecraft.resources.ResourceLocation.tryParse(idStr);
         if (id == null) {
             throw new IllegalArgumentException("Invalid biome id: " + biomeName + " (must be lowercase a-z0-9/._-)");
@@ -272,7 +256,6 @@ public class Biomes {
 
         Object regOrLookup;
         try {
-            // prefer lookupOrThrow if present
             Method m = level.registryAccess().getClass()
                     .getMethod("lookupOrThrow", ResourceKey.class);
             regOrLookup = m.invoke(level.registryAccess(), Registries.BIOME);
@@ -293,7 +276,6 @@ public class Biomes {
             }
         }
 
-        // HolderGetter path
         try {
             Method getOrThrow = regOrLookup.getClass().getMethod("getOrThrow", ResourceKey.class);
             @SuppressWarnings("unchecked")
@@ -302,7 +284,6 @@ public class Biomes {
             return h;
         } catch (NoSuchMethodException ignored) { }
 
-        // Registry<Biome> path
         try {
             Method getHolder = regOrLookup.getClass().getMethod("getHolder", ResourceKey.class);
             Object opt = getHolder.invoke(regOrLookup, key);
@@ -312,7 +293,6 @@ public class Biomes {
             String finalIdStr = idStr;
             return oh.orElseThrow(() -> new IllegalArgumentException("Biome not found: " + finalIdStr));
         } catch (NoSuchMethodException e) {
-            // last resort: get(ResourceKey) returning Biome, then wrap direct
             try {
                 Method get = regOrLookup.getClass().getMethod("get", ResourceKey.class);
                 Object biome = get.invoke(regOrLookup, key);
@@ -330,7 +310,6 @@ public class Biomes {
         }
     }
 
-    // ===== Reflection helpers & packet plumbing =====
     @SuppressWarnings("unchecked")
     private static PalettedContainer<Holder<net.minecraft.world.level.biome.Biome>>
     newEmptyBiomeContainer(Holder<net.minecraft.world.level.biome.Biome> fill) {
@@ -383,7 +362,6 @@ public class Biomes {
         return (List<ClientboundChunksBiomesPacket.ChunkBiomeData>)(List<?>) list;
     }
 
-    // Simple tuple for async work
     private static final class ChunkWork {
         final ChunkPos pos;
         final List<PalettedContainer<Holder<net.minecraft.world.level.biome.Biome>>> sectionCopies;
