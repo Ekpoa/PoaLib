@@ -43,6 +43,7 @@ poa/poalib/nmsrelated/Biomes.class
 poa/poalib/placeholders/ActualPlaceholder.class
 poa/poalib/worldguard/events/RegionChangeEvent.class
 poa/poalib/worldguard/WorldGuard.class
+poa/poalib/entity/PlayerUtil.class
 poa/poalib/webooks/DiscordWebhook$JSONObject.class
 poa/poalib/messages/Messages.class
 poa/poalib/PoaLib.class
