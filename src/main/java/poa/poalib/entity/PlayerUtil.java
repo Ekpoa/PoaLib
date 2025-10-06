@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerUtil {
-    public static List<Block> getBlocksInHitbox(Player player) {
-        BoundingBox box = player.getBoundingBox().expand(0.05); // small buffer for precision
+    public static List<Block> getBlocksInHitbox(Player player, float expand) {
+        BoundingBox box = player.getBoundingBox().expand(expand);
         World world = player.getWorld();
         List<Block> blocks = new ArrayList<>();
 
@@ -25,16 +25,26 @@ public class PlayerUtil {
             for (int y = minY; y <= maxY; y++) {
                 for (int z = minZ; z <= maxZ; z++) {
                     Block block = world.getBlockAt(x, y, z);
-                    BoundingBox blockBox = block.getBoundingBox();
 
-                    // Check if the player's hitbox intersects this block's hitbox
+                    // fluids and non-solid blocks often have null bounding boxes, so include them directly
+                    if (block.isLiquid()) {
+                        blocks.add(block);
+                        continue;
+                    }
+
+                    BoundingBox blockBox = block.getBoundingBox();
                     if (box.overlaps(blockBox)) {
                         blocks.add(block);
                     }
                 }
             }
         }
+
         return blocks;
     }
+    public static List<Block> getBlocksInHitbox(Player player) {
+        return getBlocksInHitbox(player, 0);
+    }
+
 
 }
