@@ -37,7 +37,6 @@ public final class PoaLib extends JavaPlugin {
 
 
         try {
-
             RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
                 lpAPI = provider.getProvider();
