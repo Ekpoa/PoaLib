@@ -20,7 +20,7 @@ public class RefreshChunks {
 
         // NMS handles
         ServerPlayer nmsPlayer = ((CraftPlayer) player).getHandle();
-        ServerLevel nmsLevel  = nmsPlayer.serverLevel();
+        ServerLevel nmsLevel  = nmsPlayer.level();
         ServerGamePacketListenerImpl conn = nmsPlayer.connection;
         LevelLightEngine lightEngine = nmsLevel.getLightEngine();
 
@@ -58,7 +58,7 @@ public class RefreshChunks {
 
         // NMS handles
         ServerPlayer nmsPlayer = ((CraftPlayer) player).getHandle();
-        ServerLevel nmsLevel  = nmsPlayer.serverLevel();
+        ServerLevel nmsLevel  = nmsPlayer.level();
         ServerGamePacketListenerImpl conn = nmsPlayer.connection;
         LevelLightEngine lightEngine = nmsLevel.getLightEngine();
 

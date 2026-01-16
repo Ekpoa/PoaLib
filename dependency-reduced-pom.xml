@@ -24,7 +24,7 @@
       <plugin>
         <groupId>ca.bkaw</groupId>
         <artifactId>paper-nms-maven-plugin</artifactId>
-        <version>1.4.6</version>
+        <version>1.4.10</version>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -112,7 +112,7 @@
     <dependency>
       <groupId>ca.bkaw</groupId>
       <artifactId>paper-nms</artifactId>
-      <version>1.21.4-SNAPSHOT</version>
+      <version>1.21.11-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

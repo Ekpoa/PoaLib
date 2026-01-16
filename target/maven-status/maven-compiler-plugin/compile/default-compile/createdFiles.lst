@@ -3,7 +3,6 @@ poa/poalib/items/Attributes.class
 poa/poalib/webooks/DiscordWebhook$EmbedObject.class
 poa/poalib/placeholders/CustomPlaceholderEvent.class
 poa/poalib/luckperms/LuckPerm.class
-poa/poalib/blockutil/BlockMarker.class
 poa/poalib/math/Cardial.class
 poa/poalib/blockutil/Locations.class
 poa/poalib/tabcomplete/EasyTabComplete.class
@@ -30,7 +29,6 @@ poa/poalib/entity/SpawnEntity.class
 poa/poalib/commands/TimeInput.class
 poa/poalib/webooks/DiscordWebhook$EmbedObject$Image.class
 poa/poalib/displays/Displays$1.class
-poa/poalib/nmsrelated/Biomes$ChunkWork.class
 poa/poalib/displays/Displays.class
 poa/poalib/blockutil/CurveLocation.class
 poa/poalib/math/Cardial$Cardinal.class
@@ -39,7 +37,6 @@ poa/poalib/webooks/DiscordWebhook$EmbedObject$Field.class
 poa/poalib/yml/PoaYaml.class
 poa/poalib/reflection/ReflectionUtility.class
 poa/poalib/items/ItemNullCheck.class
-poa/poalib/nmsrelated/Biomes.class
 poa/poalib/placeholders/ActualPlaceholder.class
 poa/poalib/worldguard/events/RegionChangeEvent.class
 poa/poalib/worldguard/WorldGuard.class

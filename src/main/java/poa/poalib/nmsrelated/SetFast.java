@@ -37,7 +37,7 @@ public class SetFast implements EventListener {
             List<BlockPos> blockPositions = entry.getValue();
 
             for (BlockPos pos : blockPositions) {
-                chunk.setBlockState(pos, state, false, false);
+                chunk.setBlockState(pos, state, 16);
             }
 
             world.refreshChunk(chunk.locX, chunk.locZ);
@@ -56,7 +56,7 @@ public class SetFast implements EventListener {
             List<BlockPos> blockPositions = entry.getValue();
 
             for (BlockPos pos : blockPositions)
-                chunk.setBlockState(pos, state, false, false);
+                chunk.setBlockState(pos, state, 16);
 
 
             world.refreshChunk(chunk.locX, chunk.locZ);
@@ -79,7 +79,7 @@ public class SetFast implements EventListener {
             for (BlockPos pos : blockPositions) {
                 final BlockState blockState = chunk.getBlockState(pos);
                 if(blockState == state1)
-                    chunk.setBlockState(pos, stateTo, false, false);
+                    chunk.setBlockState(pos, stateTo, 16);
             }
 
 
