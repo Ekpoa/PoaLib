@@ -8,6 +8,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import poa.poalib.commands.TestCommand;
+import poa.poalib.packetutil.persistentfakeblock.PersistentFakeBlockEvents;
 import poa.poalib.placeholders.ActualPlaceholder;
 import poa.poalib.worldguard.WorldGuardMain;
 import poa.poalib.worldguard.events.PlayerMoveListener;
@@ -16,7 +17,7 @@ import java.util.logging.Level;
 
 public final class PoaLib extends JavaPlugin {
 
-    public static PoaLib libINSTANCE;
+    public static PoaLib LIB_INSTANCE;
 
 
     public static LuckPerms lpAPI;
@@ -26,7 +27,7 @@ public final class PoaLib extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        libINSTANCE = this;
+        LIB_INSTANCE = this;
         saveDefaultConfig();
         setupEconomy();
         setupPermissions();
@@ -34,7 +35,7 @@ public final class PoaLib extends JavaPlugin {
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerMoveListener(), this);
-
+        pm.registerEvents(new PersistentFakeBlockEvents(), this);
 
         try {
             RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
@@ -54,17 +55,17 @@ public final class PoaLib extends JavaPlugin {
 
 
     public static void isLoaded(){
-        libINSTANCE.getLogger().log(Level.INFO, "PoaLib Loaded");
+        LIB_INSTANCE.getLogger().log(Level.INFO, "PoaLib Loaded");
     }
 
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            libINSTANCE.getLogger().log(Level.SEVERE, "NO VAULT");
+            LIB_INSTANCE.getLogger().log(Level.SEVERE, "NO VAULT");
             return false;
         }
         RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> rsp = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (rsp == null) {
-            libINSTANCE.getLogger().log(Level.SEVERE, "NO RSP FOR VAULT");
+            LIB_INSTANCE.getLogger().log(Level.SEVERE, "NO RSP FOR VAULT");
             return false;
         }
         economy = rsp.getProvider();

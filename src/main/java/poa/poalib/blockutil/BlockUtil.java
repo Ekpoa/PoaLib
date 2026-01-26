@@ -114,6 +114,32 @@ public class BlockUtil {
         return new Location(world, x + 0.5, y, z + 0.5); // Center in block
     }
 
+    public static long blockKey(int x, int y, int z) {
+        long lx = ((long) x & 0x3FFFFFFL);      // 26 bits
+        long lz = ((long) z & 0x3FFFFFFL);      // 26 bits
+        long ly = ((long) y & 0xFFFFFL);        // 20 bits
+        return (lx << 38) | (lz << 12) | ly;
+    }
 
+    public static long blockKey(Location location) {
+        return blockKey(
+                location.getBlockX(),
+                location.getBlockY(),
+                location.getBlockZ()
+        );
+    }
+
+
+    public static Location locationFromBlockKey(World world, long key) {
+        int x = (int) (key >> 38);
+        int z = (int) ((key >> 12) & 0x3FFFFFFL);
+        int y = (int) (key & 0xFFFFFL);
+
+        if (x >= 0x2000000) x -= 0x4000000;
+        if (z >= 0x2000000) z -= 0x4000000;
+        if (y >= 0x80000)   y -= 0x100000;
+
+        return new Location(world, x, y, z);
+    }
 
 }

@@ -175,5 +175,11 @@
             <artifactId>commons-jexl3</artifactId>
             <version>3.2</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport</artifactId>
+            <version>4.1.106.Final</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

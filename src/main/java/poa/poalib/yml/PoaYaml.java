@@ -24,7 +24,7 @@ import java.util.UUID;
 public class PoaYaml extends YamlConfiguration {
 
     public void saveAsync(File file) {
-        Bukkit.getScheduler().runTaskAsynchronously(PoaLib.libINSTANCE, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(PoaLib.LIB_INSTANCE, () -> {
             try {
                 this.save(file);
             } catch (IOException e) {

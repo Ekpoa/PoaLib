@@ -3,11 +3,9 @@ package poa.poalib.displays;
 import jdk.jfr.Description;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MenuType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
@@ -85,7 +83,7 @@ public class Displays {
                     itemDisplay.teleportAsync(newLoc);
                 }
             }
-        }.runTaskTimerAsynchronously(PoaLib.libINSTANCE, 0L, 1L);
+        }.runTaskTimerAsynchronously(PoaLib.LIB_INSTANCE, 0L, 1L);
 
 
     }

@@ -10,7 +10,6 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.C;
 import poa.poalib.PoaLib;
 
 import java.util.ArrayList;
@@ -103,7 +102,7 @@ public class WorldGuard {
         int xPerTick = Math.max(1, totalX / (int) timeToTake);
         AtomicInteger currentX = new AtomicInteger(xMin);
 
-        Bukkit.getScheduler().runTaskTimer(PoaLib.libINSTANCE, task -> {
+        Bukkit.getScheduler().runTaskTimer(PoaLib.LIB_INSTANCE, task -> {
             int startX = currentX.get();
             int endX = Math.min(startX + xPerTick - 1, xMax);
 

@@ -19,7 +19,7 @@ public class Log {
     @SneakyThrows
     public static void logToFile(File file, String string, boolean addTime){
         final String[] text = {string};
-        Bukkit.getScheduler().runTaskAsynchronously(PoaLib.libINSTANCE, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(PoaLib.LIB_INSTANCE, () -> {
             try {
 
                 file.mkdirs();

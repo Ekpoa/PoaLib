@@ -11,11 +11,14 @@
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/nmsrelated/RefreshChunks.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/packetutil/Particles.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/commands/TimeInput.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/packetutil/persistentfakeblock/PersistentFakeBlockEvents.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/items/Attributes.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/entity/SpawnEntity.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/placeholders/ActualPlaceholder.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/packetutil/persistentfakeblock/PersistentFakeBlock.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/blockutil/CurveLocation.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/general/General.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/packetutil/ChannelHandler.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/worldguard/events/PlayerMoveListener.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/displays/Displays.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/blockutil/Locations.java
@@ -24,6 +27,7 @@
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/nmsrelated/SetFast.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/entity/PlayerUtil.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/math/Euler.java
+/Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/packetutil/PipelineInjector.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/economyshopgui/EconomyShop.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/economy/Economy.java
 /Users/alex/Documents/Plugins/PoaLib/src/main/java/poa/poalib/PoaLib.java
