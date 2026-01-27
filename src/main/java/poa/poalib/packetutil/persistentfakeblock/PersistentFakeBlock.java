@@ -51,14 +51,15 @@ public class PersistentFakeBlock {
 
         removeFakeBlock(location, false);
 
+        if (location.isChunkLoaded()) {
+            player.sendBlockChange(location, blockData);
+        }
+
         worldChunkMap
                 .computeIfAbsent(worldId, w -> new ConcurrentHashMap<>())
                 .computeIfAbsent(chunkKey, c -> new ConcurrentHashMap<>())
                 .put(blockKey, blockData);
 
-        if (location.isChunkLoaded()) {
-            player.sendBlockChange(location, blockData);
-        }
     }
 
     public void removeFakeBlock(Location location, boolean showDefaultBlock) {
