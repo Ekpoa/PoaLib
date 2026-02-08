@@ -214,6 +214,10 @@ public class Messages {
         return PaperAdventure.WRAPPER_AWARE_SERIALIZER.deserialize(nms);
     }
 
+    public static net.minecraft.network.chat.Component toNMS(Component paperComponent) {
+        return PaperAdventure.WRAPPER_AWARE_SERIALIZER.serialize(paperComponent);
+    }
+
     public static Component simpleComponent(String string){
         return MiniMessage.miniMessage().deserialize(Messages.essentialsToMinimessage(string));
     }
