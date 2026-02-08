@@ -11,6 +11,7 @@ poa/poalib/webooks/DiscordWebhook$EmbedObject$Thumbnail.class
 poa/poalib/nmsrelated/RefreshChunks.class
 poa/poalib/math/Maths.class
 poa/poalib/nmsrelated/EntityNMS.class
+poa/poalib/blockutil/BlockUtil$ConnectedBlocks.class
 poa/poalib/worldguard/WorldGuardMain.class
 poa/poalib/messages/Log.class
 poa/poalib/worldguard/RegionAt.class
