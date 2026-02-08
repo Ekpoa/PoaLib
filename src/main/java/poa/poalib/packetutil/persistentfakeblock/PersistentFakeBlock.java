@@ -1,11 +1,13 @@
 package poa.poalib.packetutil.persistentfakeblock;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
+import poa.poalib.PoaLib;
 import poa.poalib.blockutil.BlockUtil;
 
 import java.util.HashMap;
@@ -55,11 +57,13 @@ public class PersistentFakeBlock {
             player.sendBlockChange(location, blockData);
         }
 
+        Bukkit.getScheduler().runTaskLater(PoaLib.LIB_INSTANCE, () -> {
         worldChunkMap
                 .computeIfAbsent(worldId, w -> new ConcurrentHashMap<>())
                 .computeIfAbsent(chunkKey, c -> new ConcurrentHashMap<>())
                 .put(blockKey, blockData);
 
+    }, 1L);
     }
 
     public void removeFakeBlock(Location location, boolean showDefaultBlock) {
