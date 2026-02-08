@@ -2,6 +2,7 @@ package poa.poalib.blockutil;
 
 import de.tr7zw.changeme.nbtapi.NBTChunk;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
+import lombok.Getter;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,9 +13,8 @@ import org.bukkit.block.data.Bisected;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.annotation.Nullable;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BlockUtil {
@@ -41,12 +41,12 @@ public class BlockUtil {
         return null;
     }
 
-    public static List<Block> blocksInBoundingBox(BoundingBox box, World world){
+    public static List<Block> blocksInBoundingBox(BoundingBox box, World world) {
         List<Block> tr = new ArrayList<>();
-        for(double x = box.getMinX(); x < box.getMaxX(); x++)
-            for(double y = box.getMinY(); y < box.getMaxY(); y++)
-                for(double z = box.getMinZ(); z < box.getMaxZ(); z++)
-                    tr.add(world.getBlockAt(new Location(world,x,y,z)));
+        for (double x = box.getMinX(); x < box.getMaxX(); x++)
+            for (double y = box.getMinY(); y < box.getMaxY(); y++)
+                for (double z = box.getMinZ(); z < box.getMaxZ(); z++)
+                    tr.add(world.getBlockAt(new Location(world, x, y, z)));
 
 
         return tr;
@@ -137,9 +137,77 @@ public class BlockUtil {
 
         if (x >= 0x2000000) x -= 0x4000000;
         if (z >= 0x2000000) z -= 0x4000000;
-        if (y >= 0x80000)   y -= 0x100000;
+        if (y >= 0x80000) y -= 0x100000;
 
         return new Location(world, x, y, z);
     }
 
+
+    public static class ConnectedBlocks {
+
+        private final Set<Block> visitedBlocks = new HashSet<>();
+
+        public ConnectedBlocks(){}
+
+        public Set<Block> search(Location start, int limit, @Nullable Material filter) {
+            visitedBlocks.clear();
+
+            if (start == null || limit <= 0) {
+                return visitedBlocks;
+            }
+
+            final Block startBlock = start.getBlock();
+            final Material startType = startBlock.getType();
+
+            if (startType.isAir()) {
+                return visitedBlocks;
+            }
+
+            if (filter != null && startType != filter) {
+                return visitedBlocks;
+            }
+
+            final ArrayDeque<Block> queue = new ArrayDeque<>(Math.min(limit, 256));
+            queue.add(startBlock);
+            visitedBlocks.add(startBlock);
+
+            while (!queue.isEmpty() && visitedBlocks.size() < limit) {
+                final Block current = queue.poll();
+
+                final int x = current.getX();
+                final int y = current.getY();
+                final int z = current.getZ();
+                final World world = current.getWorld();
+
+                addIfValid(queue, world.getBlockAt(x, y + 1, z), filter, limit);
+                addIfValid(queue, world.getBlockAt(x, y - 1, z), filter, limit);
+                addIfValid(queue, world.getBlockAt(x + 1, y, z), filter, limit);
+                addIfValid(queue, world.getBlockAt(x - 1, y, z), filter, limit);
+                addIfValid(queue, world.getBlockAt(x, y, z + 1), filter, limit);
+                addIfValid(queue, world.getBlockAt(x, y, z - 1), filter, limit);
+            }
+
+            return visitedBlocks;
+        }
+
+        private void addIfValid(Queue<Block> queue, Block block, @Nullable Material filter, int limit) {
+            if (visitedBlocks.size() >= limit) {
+                return;
+            }
+
+            final Material type = block.getType();
+            if (type.isAir()) {
+                return;
+            }
+
+            if (filter != null && type != filter) {
+                return;
+            }
+
+            if (visitedBlocks.add(block)) {
+                queue.add(block);
+            }
+        }
+
+    }
 }
