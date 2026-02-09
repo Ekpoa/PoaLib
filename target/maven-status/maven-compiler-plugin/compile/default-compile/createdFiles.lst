@@ -42,6 +42,7 @@ poa/poalib/webooks/DiscordWebhook$EmbedObject$Field.class
 poa/poalib/yml/PoaYaml.class
 poa/poalib/reflection/ReflectionUtility.class
 poa/poalib/items/ItemNullCheck.class
+poa/poalib/color/ColorUtil.class
 poa/poalib/placeholders/ActualPlaceholder.class
 poa/poalib/worldguard/events/RegionChangeEvent.class
 poa/poalib/worldguard/WorldGuard.class
