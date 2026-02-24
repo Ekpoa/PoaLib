@@ -115,33 +115,27 @@ public class BlockUtil {
     }
 
     public static long blockKey(int x, int y, int z) {
-        long lx = ((long) x & 0x3FFFFFFL);      // 26 bits
-        long lz = ((long) z & 0x3FFFFFFL);      // 26 bits
-        long ly = ((long) y & 0xFFFFFL);        // 20 bits
+        long lx = (long) x & 0x3FFFFFFL; // 26 bits
+        long lz = (long) z & 0x3FFFFFFL; // 26 bits
+        long ly = (long) y & 0xFFFL;     // 12 bits
         return (lx << 38) | (lz << 12) | ly;
     }
 
     public static long blockKey(Location location) {
-        return blockKey(
-                location.getBlockX(),
-                location.getBlockY(),
-                location.getBlockZ()
-        );
+        return blockKey(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
-
 
     public static Location locationFromBlockKey(World world, long key) {
         int x = (int) (key >> 38);
         int z = (int) ((key >> 12) & 0x3FFFFFFL);
-        int y = (int) (key & 0xFFFFFL);
+        int y = (int) (key & 0xFFFL);
 
-        if (x >= 0x2000000) x -= 0x4000000;
+        if (x >= 0x2000000) x -= 0x4000000; // 2^25, 2^26
         if (z >= 0x2000000) z -= 0x4000000;
-        if (y >= 0x80000) y -= 0x100000;
+        if (y >= 0x800)     y -= 0x1000;    // 2^11, 2^12
 
         return new Location(world, x, y, z);
     }
-
 
     public static class ConnectedBlocks {
 
