@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -40,6 +41,45 @@ public class WorldGuard {
 
         return tr;
     }
+
+    public static List<ProtectedRegion> getRegionsAt(World world, int x, int y, int z) {
+        if (world == null) return Collections.emptyList();
+
+        final RegionManager manager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
+        if (manager == null) return Collections.emptyList();
+
+        final ApplicableRegionSet regionSet =
+                manager.getApplicableRegions(BlockVector3.at(x, y, z));
+
+        if (regionSet.size() == 0) return Collections.emptyList();
+
+        final List<ProtectedRegion> regions = new ArrayList<>(regionSet.size());
+        for (ProtectedRegion region : regionSet) {
+            regions.add(region);
+        }
+
+        return regions;
+    }
+
+    public static List<String> getRegionsAtAsString(World world, int x, int y, int z) {
+        if (world == null) return Collections.emptyList();
+
+        final RegionManager manager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
+        if (manager == null) return Collections.emptyList();
+
+        final ApplicableRegionSet regionSet =
+                manager.getApplicableRegions(BlockVector3.at(x, y, z));
+
+        if (regionSet.size() == 0) return Collections.emptyList();
+
+        final List<String> ids = new ArrayList<>(regionSet.size());
+        for (ProtectedRegion region : regionSet) {
+            ids.add(region.getId());
+        }
+
+        return ids;
+    }
+
 
     public static boolean canBuild(Player player, Location location) {
         if (player.hasPermission("worldguard.region.bypass." + location.getWorld().getName()))
