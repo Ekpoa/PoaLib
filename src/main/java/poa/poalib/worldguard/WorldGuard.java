@@ -195,16 +195,32 @@ public class WorldGuard {
         return out;
     }
 
-    public static List<Chunk> getRegionChunksCuboid(World world, String regionId, boolean loadedOnly) {
+    public static List<Chunk> getRegionChunksCuboidString(World world, String regionId, boolean loadedOnly) {
         if (world == null || regionId == null || regionId.isEmpty()) return Collections.emptyList();
 
         final RegionManager manager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
         if (manager == null) return Collections.emptyList();
 
         final ProtectedRegion region = manager.getRegion(regionId);
-        if (!(region instanceof ProtectedCuboidRegion cuboid)) return Collections.emptyList();
+        if (region == null) return Collections.emptyList();
 
-        return getRegionChunksCuboid(world, cuboid, loadedOnly);
+        final BlockVector3 min = region.getMinimumPoint();
+        final BlockVector3 max = region.getMaximumPoint();
+
+        int cMinX = Math.floorDiv(min.getBlockX(), 16);
+        int cMaxX = Math.floorDiv(max.getBlockX(), 16);
+        int cMinZ = Math.floorDiv(min.getBlockZ(), 16);
+        int cMaxZ = Math.floorDiv(max.getBlockZ(), 16);
+
+        List<Chunk> out = new ArrayList<>((cMaxX - cMinX + 1) * (cMaxZ - cMinZ + 1));
+        for (int cx = cMinX; cx <= cMaxX; cx++) {
+            for (int cz = cMinZ; cz <= cMaxZ; cz++) {
+                if (!loadedOnly || world.isChunkLoaded(cx, cz)) {
+                    out.add(world.getChunkAt(cx, cz));
+                }
+            }
+        }
+        return out;
     }
 
     public static ProtectedCuboidRegion getCuboidRegion(World world, String regionName) {
