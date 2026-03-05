@@ -195,6 +195,18 @@ public class WorldGuard {
         return out;
     }
 
+    public static List<Chunk> getRegionChunksCuboid(World world, String regionId, boolean loadedOnly) {
+        if (world == null || regionId == null || regionId.isEmpty()) return Collections.emptyList();
+
+        final RegionManager manager = WorldGuardMain.regionContainer.get(BukkitAdapter.adapt(world));
+        if (manager == null) return Collections.emptyList();
+
+        final ProtectedRegion region = manager.getRegion(regionId);
+        if (!(region instanceof ProtectedCuboidRegion cuboid)) return Collections.emptyList();
+
+        return getRegionChunksCuboid(world, cuboid, loadedOnly);
+    }
+
     public static ProtectedCuboidRegion getCuboidRegion(World world, String regionName) {
         RegionManager regionManager = com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer()
                 .get(BukkitAdapter.adapt(world));
