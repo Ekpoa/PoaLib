@@ -1,5 +1,6 @@
 package poa.poalib.worldguard.events;
 
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -9,6 +10,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.List;
 
+@Getter
 public class RegionChangeEvent extends Event {
 
 
@@ -23,14 +25,6 @@ public class RegionChangeEvent extends Event {
         this.regions = regions;
         this.moveEvent = moveEvent;
         this.teleportEvent = teleportEvent;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public List<String> getRegions() {
-        return regions;
     }
 
     @Override
