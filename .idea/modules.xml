@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PoaLib.iml" filepath="$PROJECT_DIR$/PoaLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PoaLib.iml" filepath="$PROJECT_DIR$/.idea/PoaLib.iml" />
     </modules>
   </component>
 </project>

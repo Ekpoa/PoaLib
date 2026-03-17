@@ -26,7 +26,7 @@ public class PlayerMoveListener implements Listener {
         List<String> previousRegions = getPreviousRegions(player);
 
         if (!currentRegions.equals(previousRegions)) {
-            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions);
+            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions, e, null);
             Bukkit.getServer().getPluginManager().callEvent(regionEnterEvent);
 
             setPreviousRegions(player, currentRegions);
@@ -45,7 +45,7 @@ public class PlayerMoveListener implements Listener {
         List<String> previousRegions = getPreviousRegions(player);
 
         if (!currentRegions.equals(previousRegions)) {
-            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions);
+            RegionChangeEvent regionEnterEvent = new RegionChangeEvent(player, currentRegions, null, e);
             Bukkit.getServer().getPluginManager().callEvent(regionEnterEvent);
 
             setPreviousRegions(player, currentRegions);
