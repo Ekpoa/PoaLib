@@ -136,6 +136,7 @@ public class PoaYaml extends YamlConfiguration {
         if(createFile)
             file.createNewFile();
         PoaYaml config = new PoaYaml();
+        config.options().width(Integer.MAX_VALUE);
         config.load(file);
         return config;
     }
