@@ -17,6 +17,7 @@ import poa.poalib.PoaLib;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -131,13 +132,16 @@ public class PoaYaml extends YamlConfiguration {
     }
 
 
+
     @SneakyThrows
     public static PoaYaml loadFromFile(File file, boolean createFile) {
         if(createFile)
             file.createNewFile();
         PoaYaml config = new PoaYaml();
         config.options().width(Integer.MAX_VALUE);
-        config.load(file);
+
+
+
         return config;
     }
     public static PoaYaml loadFromFile(File file) {
