@@ -26632,6 +26632,7 @@ c	org/bukkit/craftbukkit/entity/CraftZombie	org/bukkit/craftbukkit/v1_21_R7/enti
 c	org/bukkit/craftbukkit/help/SimpleHelpMap	org/bukkit/craftbukkit/v1_21_R7/help/SimpleHelpMap
 c	org/bukkit/craftbukkit/help/SimpleHelpMap$IsCommandTopicPredicate	org/bukkit/craftbukkit/v1_21_R7/help/SimpleHelpMap$IsCommandTopicPredicate
 c	org/bukkit/craftbukkit/legacy/CraftLegacy	org/bukkit/craftbukkit/v1_21_R7/legacy/CraftLegacy
+c	org/bukkit/craftbukkit/legacy/CraftLegacy$1	org/bukkit/craftbukkit/v1_21_R7/legacy/CraftLegacy$1
 c	org/bukkit/craftbukkit/legacy/FieldRename	org/bukkit/craftbukkit/v1_21_R7/legacy/FieldRename
 c	org/bukkit/craftbukkit/map/CraftMapCanvas	org/bukkit/craftbukkit/v1_21_R7/map/CraftMapCanvas
 c	org/bukkit/craftbukkit/map/CraftMapCursor	org/bukkit/craftbukkit/v1_21_R7/map/CraftMapCursor

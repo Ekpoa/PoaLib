@@ -139,9 +139,7 @@ public class PoaYaml extends YamlConfiguration {
             file.createNewFile();
         PoaYaml config = new PoaYaml();
         config.options().width(Integer.MAX_VALUE);
-
-
-
+        config.load(file);
         return config;
     }
     public static PoaYaml loadFromFile(File file) {
