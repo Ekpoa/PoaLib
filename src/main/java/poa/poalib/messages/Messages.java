@@ -110,6 +110,50 @@ public class Messages {
             return formatDecimal(number / 1000000000000L) + "T"; // Trillions
         }
     }
+
+    private static final DecimalFormat NORMAL_FORMAT = new DecimalFormat("#,##0");
+    private static final DecimalFormat SHORT_FORMAT = new DecimalFormat("0.##");
+
+    public static String numberFormat4(double number) {
+        double abs = Math.abs(number);
+
+        if (abs < 1000) {
+            return NORMAL_FORMAT.format(number);
+        }
+
+        String[] suffixes = {"k", "m", "b", "t", "q"};
+        double value = number / 1000.0;
+        int suffixIndex = 0;
+
+        while (Math.abs(value) >= 1000 && suffixIndex < suffixes.length - 1) {
+            value /= 1000.0;
+            suffixIndex++;
+        }
+
+        int wholeDigits = (int) Math.floor(Math.log10(Math.abs(value))) + 1;
+        int decimals = Math.min(2, Math.max(0, 4 - wholeDigits));
+
+        double rounded = round(value, decimals);
+
+        if (Math.abs(rounded) >= 1000 && suffixIndex < suffixes.length - 1) {
+            rounded /= 1000.0;
+            suffixIndex++;
+
+            wholeDigits = (int) Math.floor(Math.log10(Math.abs(rounded))) + 1;
+            decimals = Math.min(2, Math.max(0, 4 - wholeDigits));
+            rounded = round(rounded, decimals);
+        }
+
+        SHORT_FORMAT.setMaximumFractionDigits(decimals);
+
+        return SHORT_FORMAT.format(rounded) + suffixes[suffixIndex];
+    }
+
+    private static double round(double value, int decimals) {
+        double multiplier = Math.pow(10, decimals);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
     private static String formatDecimal(double number) {
         if (number % 1 == 0) {
             // If the number is a whole number, cast to long to remove the decimal part
