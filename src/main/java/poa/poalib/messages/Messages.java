@@ -1,10 +1,12 @@
 package poa.poalib.messages;
 
 import io.papermc.paper.adventure.PaperAdventure;
-import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+
+import java.lang.reflect.Method;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -51,7 +53,20 @@ public class Messages {
     }
 
     public static String placeholder(OfflinePlayer player, String string){
-        return PlaceholderAPI.setPlaceholders(player, string);
+        if (string == null)
+            return null;
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null)
+            return string;
+
+        try {
+            Class<?> placeholderAPI = Class.forName("me.clip.placeholderapi.PlaceholderAPI");
+            Method method = placeholderAPI.getMethod("setPlaceholders", OfflinePlayer.class, String.class);
+            Object result = method.invoke(null, player, string);
+            return result instanceof String output ? output : string;
+        } catch (Exception | LinkageError ignored) {
+            return string;
+        }
     }
 
 
