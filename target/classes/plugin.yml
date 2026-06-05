@@ -1,5 +1,5 @@
 name: PoaLib
-version: 3.9
+version: 4
 main: poa.poalib.PoaLib
 api-version: 1.19
 softdepend:
