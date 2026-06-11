@@ -72,37 +72,49 @@ public class Messages {
 
 
     public static String timeToString(long sec) {
-        long days = (sec / 86400);
+        long days = sec / 86400;
         long hours = (sec % 86400) / 3600;
-        long minutes = ((sec % 86400) % 3600) / 60;
+        long minutes = (sec % 3600) / 60;
         long seconds = sec % 60;
-        String toreplace;
-        if (days != 0)
-            toreplace = days + " Days, " + hours + " Hours, " + minutes + " Minutes";
-        else if (hours != 0)
-            toreplace = hours + " Hours, " + minutes + " Minutes";
-        else if (minutes != 0)
-            toreplace = minutes + " Minutes, " + seconds + " Seconds";
-        else toreplace = seconds + " Seconds";
-        return toreplace;
 
+        List<String> parts = new ArrayList<>();
+
+        if (days > 0)
+            parts.add(days + " " + (days == 1 ? "Day" : "Days"));
+
+        if (hours > 0)
+            parts.add(hours + " " + (hours == 1 ? "Hour" : "Hours"));
+
+        if (minutes > 0)
+            parts.add(minutes + " " + (minutes == 1 ? "Minute" : "Minutes"));
+
+        if (seconds > 0 || parts.isEmpty())
+            parts.add(seconds + " " + (seconds == 1 ? "Second" : "Seconds"));
+
+        return String.join(", ", parts);
     }
 
-
     public static String timeToStringShort(long sec) {
-        long days = (sec / 86400);
+        long days = sec / 86400;
         long hours = (sec % 86400) / 3600;
-        long minutes = ((sec % 86400) % 3600) / 60;
+        long minutes = (sec % 3600) / 60;
         long seconds = sec % 60;
-        String toreplace;
-        if (days != 0)
-            toreplace = days + "d, " + hours + "h, " + minutes + "m";
-        else if (hours != 0)
-            toreplace = hours + "h, " + minutes + "m";
-        else if (minutes != 0)
-            toreplace = minutes + "m, " + seconds + "s";
-        else toreplace = seconds + "s";
-        return toreplace;
+
+        List<String> parts = new ArrayList<>();
+
+        if (days > 0)
+            parts.add(days + "d");
+
+        if (hours > 0)
+            parts.add(hours + "h");
+
+        if (minutes > 0)
+            parts.add(minutes + "m");
+
+        if (seconds > 0 || parts.isEmpty())
+            parts.add(seconds + "s");
+
+        return String.join(", ", parts);
     }
 
 
