@@ -37,7 +37,7 @@ public class PoaYaml extends YamlConfiguration {
     public void addStringList(String node, String string) {
         List<String> list = new ArrayList<>();
         if (this.isSet(node))
-            list = this.getStringList(node);
+            list = new ArrayList<>(this.getStringList(node));
 
         list.add(string);
 
@@ -47,7 +47,7 @@ public class PoaYaml extends YamlConfiguration {
     public void removeStringList(String node, String string) {
         List<String> list = new ArrayList<>();
         if (this.isSet(node))
-            list = this.getStringList(node);
+            list = new ArrayList<>(this.getStringList(node));
 
         list.remove(string);
 
