@@ -102,6 +102,19 @@ public class CreateItem {
         return itemStack;
     }
 
+    public static ItemStack emptyName(ItemStack itemStack) {
+        final ItemMeta meta = itemStack.getItemMeta();
+        meta.setHideTooltip(true);
+        itemStack.setItemMeta(meta);
+        return itemStack;
+    }
+
+    public static ItemStack emptyName(Material material) {
+        return emptyName(new ItemStack(material, 1));
+    }
+
+
+
 
     public static List<Component> stringListToComponent(List<String> list) {
         List<Component> tr = new ArrayList<>();
