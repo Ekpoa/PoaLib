@@ -9,6 +9,8 @@ softdepend:
   - PlaceholderAPI
   - EconomyShopGUI
   - EconomyShopGUI-Premium
+  - LibsDisguise
+  - PacketEvents
 commands:
   poalibtestcommand:
       permission: poa.libtestcommand

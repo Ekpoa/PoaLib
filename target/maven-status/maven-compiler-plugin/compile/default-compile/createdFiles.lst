@@ -95,6 +95,7 @@ poa\poalib\dialog\EasyDialog$ActionFactory.class
 poa\poalib\packetutil\poask\packets\TeamPacket12111.class
 poa\poalib\packetutil\poask\packets\FakeDeathAnimation12111.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Image.class
+poa\poalib\libsdisguise\LibsDisguise.class
 poa\poalib\advancements\AdvancementTree$Node.class
 poa\poalib\dialog\EasyDialog.class
 poa\poalib\tabcomplete\EasyTabComplete.class
