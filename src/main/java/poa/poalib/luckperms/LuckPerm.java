@@ -1,6 +1,7 @@
 package poa.poalib.luckperms;
 
 import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import poa.poalib.PoaLib;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -119,5 +121,20 @@ public class LuckPerm {
             user.data().clear(node -> node instanceof PrefixNode);
             PoaLib.lpAPI.getUserManager().saveUser(user);
         });
+    }
+
+    public static List<String> getPermissions(UUID uuid) {
+        LuckPerms luckPerms = LuckPermsProvider.get();
+
+        User user = luckPerms.getUserManager().loadUser(uuid).join();
+
+        Map<String, Boolean> permissions = user.getCachedData()
+                .getPermissionData()
+                .getPermissionMap();
+
+        return permissions.entrySet().stream()
+                .filter(Map.Entry::getValue)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 }
