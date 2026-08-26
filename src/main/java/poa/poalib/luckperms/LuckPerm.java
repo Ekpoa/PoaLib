@@ -5,6 +5,7 @@ import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
+import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.node.types.PrefixNode;
 import net.luckperms.api.query.QueryOptions;
 import net.milkbowl.vault.permission.Permission;
@@ -119,6 +120,13 @@ public class LuckPerm {
     public static void clearPrefix(UUID uuid) {
         requireLuckPerms().getUserManager().loadUser(uuid).thenAccept(user -> {
             user.data().clear(node -> node instanceof PrefixNode);
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
+
+    public static void addPermission(UUID uuid, String permission){
+        LuckPermsProvider.get().getUserManager().loadUser(uuid).thenAccept(user -> {
+            user.data().add(PermissionNode.builder(permission).build());
             PoaLib.lpAPI.getUserManager().saveUser(user);
         });
     }
