@@ -1,5 +1,9 @@
 package poa.poalib.tabcomplete;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.lang.management.BufferPoolMXBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +26,9 @@ public class EasyTabComplete {
         return correctTabComplete(arg, Arrays.stream(completions).toList());
     }
 
+    public static List<String> onlinePlayers(String arg){
+        return correctTabComplete(arg, Bukkit.getOnlinePlayers().stream().map(Player::getName).toList());
+    }
 
 
 }
