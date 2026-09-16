@@ -18,6 +18,8 @@ import poa.poalib.PoaLib;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,9 +27,20 @@ import java.util.UUID;
 public class PoaYaml extends YamlConfiguration {
 
     public void saveAsync(File file) {
+        if (!Bukkit.isPrimaryThread()) {
+            Bukkit.getScheduler().runTask(PoaLib.LIB_INSTANCE, () -> saveAsync(file));
+            return;
+        }
+
+        String data = this.saveToString();
+
         Bukkit.getScheduler().runTaskAsynchronously(PoaLib.LIB_INSTANCE, () -> {
             try {
-                this.save(file);
+                File parent = file.getParentFile();
+                if (parent != null)
+                    Files.createDirectories(parent.toPath());
+
+                Files.writeString(file.toPath(), data, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
