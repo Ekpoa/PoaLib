@@ -7,6 +7,7 @@ import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.node.types.PrefixNode;
+import net.luckperms.api.node.types.SuffixNode;
 import net.luckperms.api.query.QueryOptions;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -93,6 +94,19 @@ public class LuckPerm {
     public static String getSuffix(Player player) {
         return requireLuckPerms().getPlayerAdapter(Player.class).getMetaData(player).getSuffix();
     }
+    public static void setSuffix(UUID uuid, String suffix) {
+        requireLuckPerms().getUserManager().loadUser(uuid).thenAccept(user -> {
+            user.data().clear(node -> node instanceof SuffixNode);
+
+            SuffixNode suffixNode = SuffixNode.builder(suffix, 100).build();
+
+            user.data().add(suffixNode);
+
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
+
+
 
     public static CompletableFuture<Boolean> hasPermission(UUID uuid, String permission) {
         if (PoaLib.lpAPI == null)
@@ -113,6 +127,13 @@ public class LuckPerm {
 
             user.data().add(prefixNode);
 
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
+
+    public static void clearSuffix(UUID uuid) {
+        requireLuckPerms().getUserManager().loadUser(uuid).thenAccept(user -> {
+            user.data().clear(node -> node instanceof SuffixNode);
             PoaLib.lpAPI.getUserManager().saveUser(user);
         });
     }
