@@ -64,6 +64,7 @@ poa\poalib\nmsrelated\EntityNMS.class
 poa\poalib\PoaLib.class
 poa\poalib\reflection\ReflectionUtility.class
 poa\poalib\worldguard\events\PlayerMoveListener.class
+poa\poalib\color\ColorUtil$RotatingColours.class
 poa\poalib\packetutil\poask\StartAutoSpinAttack12111.class
 poa\poalib\dialog\EasyDialog$PlayerDialogClick.class
 poa\poalib\packetutil\poask\util\Messages12111.class

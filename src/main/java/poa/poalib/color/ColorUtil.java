@@ -1,5 +1,6 @@
 package poa.poalib.color;
 
+import lombok.Getter;
 import org.bukkit.Color;
 
 public final class ColorUtil {
@@ -39,5 +40,31 @@ public final class ColorUtil {
         int argb = (int) Long.parseLong(s, 16);
         return Color.fromARGB(argb);
     }
+
+    @Getter
+    public static class RotatingColours{
+
+        private float hue = 0.0f;
+
+        private int red;
+        private int green;
+        private int blue;
+
+        public void cycleRGB() {
+            hue += 0.005f;
+
+            if (hue >= 1.0f)
+                hue = 0.0f;
+
+            int rgb = java.awt.Color.HSBtoRGB(hue, 1.0f, 1.0f);
+
+            red = (rgb >> 16) & 0xFF;
+            green = (rgb >> 8) & 0xFF;
+            blue = rgb & 0xFF;
+        }
+
+    }
+
+
 }
 
