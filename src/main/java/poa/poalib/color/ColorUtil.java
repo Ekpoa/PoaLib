@@ -50,6 +50,10 @@ public final class ColorUtil {
         private int green;
         private int blue;
 
+        public RotatingColours(){
+            cycleRGB();
+        }
+
         public void cycleRGB() {
             hue += 0.005f;
 
