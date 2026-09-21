@@ -42,33 +42,71 @@ public final class ColorUtil {
     }
 
     @Getter
-    public static class RotatingColours{
+    public static class RotatingColours {
 
-        private float hue = 0.0f;
+        private float progress = 0.0f;
+        private int phase = 0;
 
-        private int red;
-        private int green;
-        private int blue;
+        private int red = 255;
+        private int green = 0;
+        private int blue = 0;
 
-        public RotatingColours(){
-            cycleRGB();
+        public RotatingColours() {
         }
 
-        public void cycleRGB() {
-            hue += 0.005f;
+        public void cycleRGB(float speed) {
+            progress += speed;
 
-            if (hue >= 1.0f)
-                hue = 0.0f;
+            while (progress >= 255.0f) {
+                progress -= 255.0f;
+                phase++;
 
-            int rgb = java.awt.Color.HSBtoRGB(hue, 1.0f, 1.0f);
+                if (phase >= 6) {
+                    phase = 0;
+                }
+            }
 
-            red = (rgb >> 16) & 0xFF;
-            green = (rgb >> 8) & 0xFF;
-            blue = rgb & 0xFF;
+            int value = Math.round(progress);
+
+            switch (phase) {
+                case 0 -> {
+                    red = 255;
+                    green = value;
+                    blue = 0;
+                }
+
+                case 1 -> {
+                    red = 255 - value;
+                    green = 255;
+                    blue = 0;
+                }
+
+                case 2 -> {
+                    red = 0;
+                    green = 255;
+                    blue = value;
+                }
+
+                case 3 -> {
+                    red = 0;
+                    green = 255 - value;
+                    blue = 255;
+                }
+
+                case 4 -> {
+                    red = value;
+                    green = 0;
+                    blue = 255;
+                }
+
+                case 5 -> {
+                    red = 255;
+                    green = 0;
+                    blue = 255 - value;
+                }
+            }
         }
-
     }
-
 
 }
 
