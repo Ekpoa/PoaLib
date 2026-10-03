@@ -2,6 +2,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\blocks\
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\advancements\AdvancementExample.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\nmsrelated\EntityNMS.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\items\Attributes.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaReachManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\Radius.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\economyshopgui\EconomyShop.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\color\ColorUtil.java
@@ -18,13 +19,18 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\PosRotPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\Components12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\GetPose12111.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\holders\ItemFrameInvHolder.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\NoClipManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\advancements\AdvancementToast.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\holders\EntityInvHolder.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\Locations.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\FakePlayer12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\GetBlockId12111.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaJumpManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\Particles.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\EntityFromID12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\math\Euler.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaWurstSupport.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\ChangeIP12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\ItemCooldown12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\BlockUtil.java
@@ -44,6 +50,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\BlocksInRegio
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\TeleportPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\messages\Log.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\placeholders\ActualPlaceholder.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaAttackManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\guardian\GuardianBeam12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\placeholders\CustomPlaceholderEvent.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\libsdisguise\LibsDisguise.java
@@ -53,6 +60,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\WorldGuard.ja
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\EntityTypeFromString12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\AnimationPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\events\RegionChangeEvent.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaInvManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\FakeTablist12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\SetEquipmentPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\Metadata12111.java
@@ -76,3 +84,4 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\StartAu
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\Messages12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\PoaLib.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\math\Cardial.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaConsoleManager.java

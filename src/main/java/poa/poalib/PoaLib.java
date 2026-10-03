@@ -1,5 +1,6 @@
 package poa.poalib;
 
+import lombok.Getter;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -14,9 +15,11 @@ import poa.poalib.packetutil.persistentfakeblock.PersistentFakeBlockEvents;
 import poa.poalib.placeholders.ActualPlaceholder;
 import poa.poalib.worldguard.WorldGuardMain;
 import poa.poalib.worldguard.events.PlayerMoveListener;
+import poa.poalib.wurstsupport.*;
 
 import java.util.logging.Level;
 
+@Getter
 public final class PoaLib extends JavaPlugin {
 
     public static PoaLib LIB_INSTANCE;
@@ -25,6 +28,13 @@ public final class PoaLib extends JavaPlugin {
     public static Economy economy;
     public static Permission perms;
     private static boolean worldGuardReady;
+
+    private NoClipManager noClipManager;
+    private PoaJumpManager poaJumpManager;
+    private PoaReachManager poaReachManager;
+    private PoaAttackManager poaAttackManager;
+    private PoaInvManager poaInvManager;
+    private PoaConsoleManager poaConsoleManager;
 
     @Override
     public void onEnable() {
@@ -43,6 +53,54 @@ public final class PoaLib extends JavaPlugin {
         registerCommands();
 
         isLoaded();
+
+
+
+        noClipManager = new NoClipManager();
+        poaJumpManager = new PoaJumpManager();
+        poaAttackManager = new PoaAttackManager();
+        poaReachManager = new PoaReachManager(this);
+        poaInvManager = new PoaInvManager();
+        poaConsoleManager = new PoaConsoleManager();
+
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                NoClipManager.CHANNEL,
+                noClipManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaJumpManager.CHANNEL,
+                poaJumpManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaReachManager.CHANNEL,
+                poaReachManager
+        );
+
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaAttackManager.CHANNEL,
+                poaAttackManager
+        );
+
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaInvManager.CHANNEL,
+                poaInvManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaConsoleManager.CHANNEL,
+                poaConsoleManager
+        );
+
+
+        getServer().getPluginManager().registerEvents(noClipManager, this);
+        getServer().getPluginManager().registerEvents(poaReachManager, this);
+        getServer().getPluginManager().registerEvents(new PoaInvManager(), this);
+
     }
 
     public static void isLoaded() {
@@ -182,5 +240,21 @@ public final class PoaLib extends JavaPlugin {
         if (command != null) {
             command.setExecutor(new TestCommand());
         }
+    }
+
+    @Override
+    public void onDisable() {
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, NoClipManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaJumpManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaReachManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaAttackManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaInvManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaConsoleManager.CHANNEL);
+
+        if (noClipManager != null)
+            noClipManager.clear();
+
+        if (poaReachManager != null)
+            poaReachManager.clear();
     }
 }

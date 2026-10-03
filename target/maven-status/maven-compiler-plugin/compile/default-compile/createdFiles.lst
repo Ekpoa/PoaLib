@@ -11,9 +11,11 @@ poa\poalib\blockutil\Locations.class
 poa\poalib\advancements\AdvancementToast$ToastBuilder.class
 poa\poalib\packetutil\poask\ChangeIP12111.class
 poa\poalib\packetutil\poask\packets\SendPayloadPacket12111.class
+poa\poalib\wurstsupport\NoClipManager.class
 poa\poalib\packetutil\poask\packets\CameraPacket12111.class
 poa\poalib\items\Attributes.class
 poa\poalib\blockutil\BlockUtil.class
+poa\poalib\wurstsupport\PoaWurstSupport.class
 poa\poalib\dialog\EasyDialog$Response.class
 poa\poalib\packetutil\poask\packets\SendPacket12111.class
 poa\poalib\packetutil\poask\packets\AttributePacket12111.class
@@ -48,6 +50,7 @@ poa\poalib\yml\PoaYaml.class
 poa\poalib\worldguard\WorldGuardMain.class
 poa\poalib\packetutil\poask\util\EntityTypeFromString12111.class
 poa\poalib\items\ItemNullCheck.class
+poa\poalib\wurstsupport\holders\ItemFrameInvHolder.class
 poa\poalib\math\Euler.class
 poa\poalib\blockutil\Radius.class
 poa\poalib\placeholders\ActualPlaceholder.class
@@ -56,8 +59,10 @@ poa\poalib\displays\Displays.class
 poa\poalib\webooks\DiscordWebhook$JSONObject.class
 poa\poalib\packetutil\poask\packets\ItemCooldown12111.class
 poa\poalib\packetutil\poask\packets\FakeTablist12111.class
+poa\poalib\wurstsupport\PoaAttackManager.class
 poa\poalib\packetutil\ChannelHandler.class
 poa\poalib\packetutil\Particles.class
+poa\poalib\wurstsupport\PoaConsoleManager.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Field.class
 poa\poalib\commands\TestCommand.class
 poa\poalib\nmsrelated\EntityNMS.class
@@ -71,11 +76,13 @@ poa\poalib\packetutil\poask\util\Messages12111.class
 poa\poalib\messages\Log.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Author.class
 poa\poalib\dialog\EasyDialog$Mode.class
+poa\poalib\wurstsupport\PoaInvManager.class
 poa\poalib\packetutil\persistentfakeblock\PersistentFakeBlockEvents.class
 poa\poalib\dialog\EasyDialog$Button.class
 poa\poalib\placeholders\CustomPlaceholderEvent.class
 poa\poalib\messages\Messages.class
 poa\poalib\packetutil\poask\util\GetPose12111.class
+poa\poalib\wurstsupport\holders\EntityInvHolder.class
 poa\poalib\blockutil\CurveLocation.class
 poa\poalib\luckperms\LuckPerm.class
 poa\poalib\webooks\DiscordWebhook.class
@@ -86,6 +93,7 @@ poa\poalib\packetutil\poask\util\GetBlockId12111.class
 poa\poalib\math\Maths.class
 poa\poalib\packetutil\poask\packets\FakeEntity12111.class
 poa\poalib\dialog\EasyDialog$DialogClick.class
+poa\poalib\wurstsupport\PoaReachManager.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject.class
 poa\poalib\packetutil\poask\packets\SetEquipmentPacket12111.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Thumbnail.class
@@ -100,3 +108,4 @@ poa\poalib\libsdisguise\LibsDisguise.class
 poa\poalib\advancements\AdvancementTree$Node.class
 poa\poalib\dialog\EasyDialog.class
 poa\poalib\tabcomplete\EasyTabComplete.class
+poa\poalib\wurstsupport\PoaJumpManager.class
