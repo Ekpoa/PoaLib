@@ -8,7 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
+import poa.poalib.PoaLib;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +23,13 @@ public class NoClipManager implements Listener, PluginMessageListener {
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte @NotNull [] message) {
         if (!CHANNEL.equals(channel) || message.length != 1)
+            return;
+
+        List<String> poaWurstSupport = PoaLib.LIB_INSTANCE.getConfig().getStringList("PoaWurstSupport");
+        if(poaWurstSupport.isEmpty())
+            return;
+
+        if(!poaWurstSupport.contains(player.getUniqueId().toString()))
             return;
 
         if (message[0] == 1) {

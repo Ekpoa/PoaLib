@@ -13,8 +13,11 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
+import poa.poalib.PoaLib;
 import poa.poalib.wurstsupport.holders.EntityInvHolder;
 import poa.poalib.wurstsupport.holders.ItemFrameInvHolder;
+
+import java.util.List;
 
 
 public class PoaInvManager implements PluginMessageListener, Listener {
@@ -25,6 +28,13 @@ public class PoaInvManager implements PluginMessageListener, Listener {
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte @NotNull [] message) {
         if (!CHANNEL.equals(channel))
+            return;
+
+        List<String> poaWurstSupport = PoaLib.LIB_INSTANCE.getConfig().getStringList("PoaWurstSupport");
+        if(poaWurstSupport.isEmpty())
+            return;
+
+        if(!poaWurstSupport.contains(player.getUniqueId().toString()))
             return;
 
         Entity targetEntity = player.getTargetEntity(120, true);
@@ -82,7 +92,7 @@ public class PoaInvManager implements PluginMessageListener, Listener {
         if(equipment == null)
             return;
 
-        Bukkit.getScheduler().runTaskLater(PoaWurstSupport.INSTANCE, () -> {
+        Bukkit.getScheduler().runTaskLater(PoaLib.LIB_INSTANCE, () -> {
             if(!entity.isValid())
                 return;
 
@@ -107,7 +117,7 @@ public class PoaInvManager implements PluginMessageListener, Listener {
         if(!entity.isValid())
             return;
 
-        Bukkit.getScheduler().runTaskLater(PoaWurstSupport.INSTANCE, () -> {
+        Bukkit.getScheduler().runTaskLater(PoaLib.LIB_INSTANCE, () -> {
             if(!entity.isValid())
                 return;
 

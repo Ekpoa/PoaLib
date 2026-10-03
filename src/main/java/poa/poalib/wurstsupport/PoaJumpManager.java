@@ -7,8 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
+import poa.poalib.PoaLib;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
 public class PoaJumpManager implements PluginMessageListener {
     public static final String CHANNEL = "poa:jump";
@@ -21,6 +23,13 @@ public class PoaJumpManager implements PluginMessageListener {
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte @NotNull [] message) {
         if (!CHANNEL.equals(channel) || message.length != MESSAGE_LENGTH)
+            return;
+
+        List<String> poaWurstSupport = PoaLib.LIB_INSTANCE.getConfig().getStringList("PoaWurstSupport");
+        if(poaWurstSupport.isEmpty())
+            return;
+
+        if(!poaWurstSupport.contains(player.getUniqueId().toString()))
             return;
 
         ByteBuffer buffer = ByteBuffer.wrap(message);

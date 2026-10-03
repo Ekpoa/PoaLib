@@ -15,7 +15,6 @@ poa\poalib\wurstsupport\NoClipManager.class
 poa\poalib\packetutil\poask\packets\CameraPacket12111.class
 poa\poalib\items\Attributes.class
 poa\poalib\blockutil\BlockUtil.class
-poa\poalib\wurstsupport\PoaWurstSupport.class
 poa\poalib\dialog\EasyDialog$Response.class
 poa\poalib\packetutil\poask\packets\SendPacket12111.class
 poa\poalib\packetutil\poask\packets\AttributePacket12111.class
