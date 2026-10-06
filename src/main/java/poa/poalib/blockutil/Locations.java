@@ -24,6 +24,13 @@ public class Locations {
         return new Location(Bukkit.getWorld(split[0]), Float.parseFloat(split[1]), Float.parseFloat(split[2]), Float.parseFloat(split[3]), Float.parseFloat(split[4]), Float.parseFloat(split[5]));
     }
 
+    public static String serializeLocationForYml(Location location) {
+        return serializeLocation(location).replace(".", ",");
+    }
+
+    public static Location deserializeLocationForYml(String string) {
+        return deserializeLocation(string.replace(",", "."));
+    }
 
     public static CompletableFuture<Location> getLastLocationAsync(UUID uuid) {
         return CompletableFuture.supplyAsync(() -> {
