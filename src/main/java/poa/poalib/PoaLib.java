@@ -36,6 +36,16 @@ public final class PoaLib extends JavaPlugin {
     private PoaInvManager poaInvManager;
     private PoaConsoleManager poaConsoleManager;
 
+    private PoaEnchantManager poaEnchantManager;
+    private PoaGamemodeManager poaGamemodeManager;
+    private PoaGiveManager poaGiveManager;
+    private PoaThruManager poaThruManager;
+
+    private PoaDupeManager poaDupeManager;
+    private PoaStatisticManager poaStatisticManager;
+    private PoaSummonManager poaSummonManager;
+    private PoaVillagerConvertManager poaVillagerConvertManager;
+
     @Override
     public void onEnable() {
         LIB_INSTANCE = this;
@@ -62,6 +72,17 @@ public final class PoaLib extends JavaPlugin {
         poaReachManager = new PoaReachManager(this);
         poaInvManager = new PoaInvManager();
         poaConsoleManager = new PoaConsoleManager();
+
+        poaEnchantManager = new PoaEnchantManager();
+        poaGamemodeManager = new PoaGamemodeManager();
+        poaGiveManager = new PoaGiveManager();
+        poaThruManager = new PoaThruManager();
+
+        poaDupeManager = new PoaDupeManager();
+        poaStatisticManager = new PoaStatisticManager();
+        poaSummonManager = new PoaSummonManager();
+
+        poaVillagerConvertManager = new PoaVillagerConvertManager();
 
         getServer().getMessenger().registerIncomingPluginChannel(
                 this,
@@ -94,6 +115,47 @@ public final class PoaLib extends JavaPlugin {
                 this,
                 PoaConsoleManager.CHANNEL,
                 poaConsoleManager
+        );
+
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaEnchantManager.CHANNEL,
+                poaEnchantManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaGamemodeManager.CHANNEL,
+                poaGamemodeManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaGiveManager.CHANNEL,
+                poaGiveManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaThruManager.CHANNEL,
+                poaThruManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaSummonManager.CHANNEL,
+                poaSummonManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaStatisticManager.CHANNEL,
+                poaStatisticManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaDupeManager.CHANNEL,
+                poaDupeManager
+        );
+        getServer().getMessenger().registerIncomingPluginChannel(
+                this,
+                PoaVillagerConvertManager.CHANNEL,
+                poaVillagerConvertManager
         );
 
 
@@ -250,6 +312,15 @@ public final class PoaLib extends JavaPlugin {
         getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaAttackManager.CHANNEL);
         getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaInvManager.CHANNEL);
         getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaConsoleManager.CHANNEL);
+
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaEnchantManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaGamemodeManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaGiveManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaThruManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaDupeManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaStatisticManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaSummonManager.CHANNEL);
+        getServer().getMessenger().unregisterIncomingPluginChannel(this, PoaVillagerConvertManager.CHANNEL);
 
         if (noClipManager != null)
             noClipManager.clear();

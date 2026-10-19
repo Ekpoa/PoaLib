@@ -13,9 +13,11 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\yml\PoaYaml.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\entity\PlayerUtil.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\reflection\ReflectionUtility.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaGiveManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\luckperms\LuckPerm.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\nmsrelated\SetFast.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\SetPassengerPacket12111.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaStatisticManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\PosRotPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\Components12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\GetPose12111.java
@@ -24,6 +26,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\NoClipManag
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\advancements\AdvancementToast.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\holders\EntityInvHolder.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\Locations.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaGamemodeManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\FakePlayer12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\GetBlockId12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaJumpManager.java
@@ -34,6 +37,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\ChangeI
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\ItemCooldown12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\BlockUtil.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\vector\Vectors.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaThruManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\commands\TimeInput.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\TeamPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\messages\Messages.java
@@ -46,14 +50,17 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\WorldGuardMai
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\events\PlayerMoveListener.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\HeadRotPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\BlocksInRegion.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaSummonManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\TeleportPacket12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\messages\Log.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\placeholders\ActualPlaceholder.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaAttackManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\guardian\GuardianBeam12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\placeholders\CustomPlaceholderEvent.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaVillagerConvertManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\libsdisguise\LibsDisguise.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\webooks\DiscordWebhook.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaEnchantManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\FakeDeathAnimation12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\worldguard\WorldGuard.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\EntityTypeFromString12111.java
@@ -65,6 +72,7 @@ C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\Metadata12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\persistentfakeblock\PersistentFakeBlock.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\PipelineInjector.java
+C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\wurstsupport\PoaDupeManager.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\util\FetchSkin12111.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\blockutil\CurveLocation.java
 C:\Users\alex\Documents\PoaLib\src\main\java\poa\poalib\packetutil\poask\packets\AttributePacket12111.java

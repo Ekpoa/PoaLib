@@ -1,3 +1,4 @@
+poa\poalib\wurstsupport\PoaStatisticManager$1.class
 poa\poalib\worldguard\WorldGuard.class
 poa\poalib\packetutil\persistentfakeblock\PersistentFakeBlock.class
 poa\poalib\nmsrelated\SetFast.class
@@ -6,6 +7,7 @@ poa\poalib\advancements\AdvancementTree$NodeBuilder.class
 poa\poalib\packetutil\poask\blocks\Biomes12111.class
 poa\poalib\advancements\AdvancementTree$Frame.class
 poa\poalib\entity\SpawnEntity.class
+poa\poalib\wurstsupport\PoaEnchantManager.class
 poa\poalib\displays\Displays$1.class
 poa\poalib\blockutil\Locations.class
 poa\poalib\advancements\AdvancementToast$ToastBuilder.class
@@ -33,6 +35,7 @@ poa\poalib\math\Cardial$Cardinal.class
 poa\poalib\packetutil\poask\util\EntityFromID12111.class
 poa\poalib\advancements\AdvancementExample.class
 poa\poalib\packetutil\poask\packets\HeadRotPacket12111.class
+poa\poalib\wurstsupport\PoaGiveManager.class
 poa\poalib\worldguard\BlocksInRegion.class
 poa\poalib\general\General.class
 poa\poalib\packetutil\poask\packets\PosRotPacket12111.class
@@ -48,6 +51,7 @@ poa\poalib\packetutil\PipelineInjector.class
 poa\poalib\yml\PoaYaml.class
 poa\poalib\worldguard\WorldGuardMain.class
 poa\poalib\packetutil\poask\util\EntityTypeFromString12111.class
+poa\poalib\wurstsupport\PoaSummonManager.class
 poa\poalib\items\ItemNullCheck.class
 poa\poalib\wurstsupport\holders\ItemFrameInvHolder.class
 poa\poalib\math\Euler.class
@@ -70,6 +74,7 @@ poa\poalib\reflection\ReflectionUtility.class
 poa\poalib\worldguard\events\PlayerMoveListener.class
 poa\poalib\color\ColorUtil$RotatingColours.class
 poa\poalib\packetutil\poask\StartAutoSpinAttack12111.class
+poa\poalib\wurstsupport\PoaGamemodeManager.class
 poa\poalib\dialog\EasyDialog$PlayerDialogClick.class
 poa\poalib\packetutil\poask\util\Messages12111.class
 poa\poalib\messages\Log.class
@@ -79,6 +84,7 @@ poa\poalib\wurstsupport\PoaInvManager.class
 poa\poalib\packetutil\persistentfakeblock\PersistentFakeBlockEvents.class
 poa\poalib\dialog\EasyDialog$Button.class
 poa\poalib\placeholders\CustomPlaceholderEvent.class
+poa\poalib\wurstsupport\PoaVillagerConvertManager.class
 poa\poalib\messages\Messages.class
 poa\poalib\packetutil\poask\util\GetPose12111.class
 poa\poalib\wurstsupport\holders\EntityInvHolder.class
@@ -96,13 +102,16 @@ poa\poalib\wurstsupport\PoaReachManager.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject.class
 poa\poalib\packetutil\poask\packets\SetEquipmentPacket12111.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Thumbnail.class
+poa\poalib\wurstsupport\PoaStatisticManager.class
 poa\poalib\economyshopgui\EconomyShop.class
+poa\poalib\wurstsupport\PoaThruManager.class
 poa\poalib\commands\TimeInput.class
 poa\poalib\packetutil\poask\packets\TeleportPacket12111.class
 poa\poalib\dialog\EasyDialog$ActionFactory.class
 poa\poalib\packetutil\poask\packets\TeamPacket12111.class
 poa\poalib\packetutil\poask\packets\FakeDeathAnimation12111.class
 poa\poalib\webooks\DiscordWebhook$EmbedObject$Image.class
+poa\poalib\wurstsupport\PoaDupeManager.class
 poa\poalib\libsdisguise\LibsDisguise.class
 poa\poalib\advancements\AdvancementTree$Node.class
 poa\poalib\dialog\EasyDialog.class
