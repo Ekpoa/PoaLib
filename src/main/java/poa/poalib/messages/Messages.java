@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 
 import java.lang.reflect.Method;
@@ -47,6 +48,65 @@ public class Messages {
         return x;
     }
 
+    public static List<String> mergeColumns(List<List<String>> sections, int sectionsPerColumn, int spacing) {
+        if (sections.isEmpty() || sectionsPerColumn < 1 || spacing < 0)
+            return new ArrayList<>();
+
+        List<List<String>> columns = new ArrayList<>();
+        List<Integer> widths = new ArrayList<>();
+
+        for (int i = 0; i < sections.size(); i += sectionsPerColumn) {
+            List<String> column = new ArrayList<>();
+            int width = 0;
+
+            for (int j = i; j < Math.min(i + sectionsPerColumn, sections.size()); j++) {
+                if (!column.isEmpty())
+                    column.add("");
+
+                for (String line : sections.get(j)) {
+                    column.add(line);
+                    width = Math.max(width, getVisibleLength(line));
+                }
+            }
+
+            columns.add(column);
+            widths.add(width);
+        }
+
+        int height = columns.stream()
+                .mapToInt(List::size)
+                .max()
+                .orElse(0);
+
+        List<String> result = new ArrayList<>();
+
+        for (int row = 0; row < height; row++) {
+            StringBuilder builder = new StringBuilder();
+
+            for (int col = 0; col < columns.size(); col++) {
+                List<String> column = columns.get(col);
+                String line = row < column.size() ? column.get(row) : "";
+
+                builder.append(line);
+
+                if (col < columns.size() - 1) {
+                    int padding = widths.get(col) - getVisibleLength(line) + spacing;
+
+                    builder.append("§r");
+                    builder.append(" ".repeat(padding));
+                }
+            }
+
+            result.add(builder.toString().stripTrailing());
+        }
+
+        return result;
+    }
+
+
+    private static int getVisibleLength(String text) {
+        return ChatColor.stripColor(text).length();
+    }
 
 
     public static String bukkitToEssentials(String string){

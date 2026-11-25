@@ -152,6 +152,13 @@ public class LuckPerm {
         });
     }
 
+    public static void removePermission(UUID uuid, String permission){
+        LuckPermsProvider.get().getUserManager().loadUser(uuid).thenAccept(user -> {
+            user.data().remove(PermissionNode.builder(permission).build());
+            PoaLib.lpAPI.getUserManager().saveUser(user);
+        });
+    }
+
     public static List<String> getPermissions(UUID uuid) {
         LuckPerms luckPerms = LuckPermsProvider.get();
 
